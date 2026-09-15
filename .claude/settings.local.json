@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Remove-Item -Force d:\\\\Raghav-portfolio\\\\src\\\\App.css, d:\\\\Raghav-portfolio\\\\src\\\\assets\\\\react.svg, d:\\\\Raghav-portfolio\\\\public\\\\vite.svg -ErrorAction SilentlyContinue; Remove-Item -Force -Recurse d:\\\\Raghav-portfolio\\\\src\\\\assets -ErrorAction SilentlyContinue; Get-ChildItem -Recurse -File d:\\\\Raghav-portfolio -Exclude node_modules | Where-Object { $_.FullName -notmatch 'node_modules' } | ForEach-Object { $_.FullName.Replace\\('d:\\\\Raghav-portfolio\\\\',''\\) })",
+      "PowerShell(node d:\\\\Raghav-portfolio\\\\scripts\\\\generate-brand-icons.mjs)"
+    ]
+  }
+}

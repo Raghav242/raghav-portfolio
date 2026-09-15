@@ -1,0 +1,279 @@
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
+}
+
+.about__main {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.about__prose p {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  line-height: 1.75;
+}
+
+.about__prose p + p {
+  margin-top: 14px;
+}
+
+.about__side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Quick facts ------------------------------------------------------------ */
+
+.about__facts {
+  display: grid;
+  gap: 0;
+  padding: 2px 18px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.about__fact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding-block: 10px;
+}
+
+.about__fact + .about__fact {
+  border-top: 1px dashed var(--border);
+}
+
+.about__fact dt {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.01em;
+}
+
+.about__fact dd {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  text-align: right;
+}
+
+/* Education -------------------------------------------------------------- */
+
+.about__education {
+  padding: 18px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.about__education-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.edu + .edu {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border);
+}
+
+.edu__head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.edu__school {
+  font-size: 0.98rem;
+  font-weight: 700;
+}
+
+.edu__badge {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 999px;
+  padding: 3px 9px;
+}
+
+.edu__degree {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin-top: 3px;
+}
+
+.edu__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.edu__dot {
+  opacity: 0.6;
+}
+
+/* Capability grid -------------------------------------------------------- */
+
+/* Two-by-two inside the left column, so it shares height with the sidebar
+   rather than adding a full row beneath it. */
+.capabilities {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.capability {
+  position: relative;
+  padding: 16px 16px 18px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 0.22s var(--ease), transform 0.22s var(--ease),
+    box-shadow 0.22s var(--ease);
+}
+
+.capability:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.capability__index {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  margin-bottom: 7px;
+}
+
+.capability__title {
+  font-size: 0.94rem;
+  margin-bottom: 5px;
+}
+
+.capability__text {
+  font-size: 0.83rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+@media (max-width: 900px) {
+  .about {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .capabilities {
+    margin-top: 40px;
+    padding-top: 34px;
+  }
+}
+
+@media (max-width: 640px) {
+  .about {
+    gap: 26px;
+  }
+
+  .about__prose p {
+    font-size: 0.94rem;
+    line-height: 1.72;
+  }
+
+  .about__prose p + p {
+    margin-top: 13px;
+  }
+
+  .about__side {
+    gap: 16px;
+  }
+
+  .about__facts {
+    padding: 2px 16px;
+  }
+
+  .about__fact {
+    padding-block: 10px;
+  }
+
+  .about__education {
+    padding: 18px;
+  }
+
+  .about__education-title {
+    margin-bottom: 14px;
+  }
+
+  .edu + .edu {
+    margin-top: 14px;
+    padding-top: 14px;
+  }
+
+  /* Card chrome costs more vertical space than it earns at this width, so the
+     capabilities collapse into a divided list with the title set inline. */
+  .capabilities {
+    display: block;
+    margin-top: 30px;
+    padding-top: 24px;
+  }
+
+  .capability {
+    padding: 13px 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+  }
+
+  .capability:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .capability + .capability {
+    border-top: 1px dashed var(--border);
+  }
+
+  .capability__index {
+    display: inline;
+    margin-bottom: 0;
+    margin-right: 8px;
+  }
+
+  .capability__title {
+    display: inline;
+    font-size: 0.96rem;
+    margin-bottom: 0;
+  }
+
+  .capability__text {
+    margin-top: 5px;
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+}

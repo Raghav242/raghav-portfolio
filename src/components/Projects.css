@@ -1,0 +1,222 @@
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 14px;
+}
+
+.project {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.22s var(--ease), box-shadow 0.22s var(--ease),
+    transform 0.22s var(--ease);
+}
+
+/* Accent sweep that reveals on hover. */
+.project::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), #a855f7);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.32s var(--ease);
+}
+
+.project:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+
+.project:hover::before {
+  transform: scaleX(1);
+}
+
+.project__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.project__name {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 1.04rem;
+  font-weight: 700;
+}
+
+/* Placeholder cards: visibly unfinished, so they never read as shipped work. */
+.project--draft {
+  border-style: dashed;
+  background: transparent;
+}
+
+.project--draft .project__blurb,
+.project--draft .project__highlights li {
+  color: var(--text-muted);
+}
+
+.project__badge {
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 3px 9px;
+}
+
+.project__links {
+  display: flex;
+  gap: 6px;
+}
+
+.project__links a {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  transition: color 0.18s var(--ease), border-color 0.18s var(--ease);
+}
+
+.project__links a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.project__blurb {
+  font-size: 0.89rem;
+  line-height: 1.62;
+  color: var(--text-secondary);
+}
+
+.project__highlights {
+  margin-top: 12px;
+  display: grid;
+  gap: 6px;
+}
+
+.project__highlights li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.project__highlights li::before {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 7px;
+  width: 5px;
+  height: 5px;
+  border: 1.5px solid var(--accent);
+  border-radius: 2px;
+  transform: rotate(45deg);
+  opacity: 0.75;
+}
+
+.project__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.projects__more {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.projects__more a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+}
+
+.projects__more a svg {
+  transition: transform 0.18s var(--ease);
+}
+
+.projects__more a:hover svg {
+  transform: translateX(3px);
+}
+
+@media (max-width: 640px) {
+  /* Five stacked cards is a lot of scrolling. Swiping horizontally keeps the
+     whole set reachable without growing the page. The next card peeks in at
+     the edge so it's obvious there's more. */
+  .projects {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* Bleed to the screen edges so cards scroll out of frame cleanly. */
+    margin-inline: -18px;
+    padding: 2px 18px 10px;
+  }
+
+  .projects::-webkit-scrollbar {
+    display: none;
+  }
+
+  .project {
+    flex: 0 0 86%;
+    min-width: 0;
+    padding: 20px;
+    scroll-snap-align: center;
+  }
+
+  .project:hover {
+    transform: none;
+  }
+
+  .project__name {
+    font-size: 1.08rem;
+  }
+
+  .project__blurb {
+    font-size: 0.89rem;
+  }
+
+  .project__highlights {
+    margin-top: 13px;
+    gap: 6px;
+  }
+
+  .project__highlights li {
+    font-size: 0.82rem;
+  }
+
+  .project__stack {
+    padding-top: 16px;
+  }
+
+  .projects__more {
+    margin-top: 20px;
+    font-size: 0.86rem;
+  }
+}

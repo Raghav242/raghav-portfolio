@@ -1,0 +1,175 @@
+.skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 12px;
+}
+
+.skills__group {
+  padding: 16px 16px 18px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 0.22s var(--ease), box-shadow 0.22s var(--ease);
+}
+
+.skills__group:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-sm);
+}
+
+.skills__group-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.skills__group-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.skills__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Skill pill ------------------------------------------------------------- */
+
+.skill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 11px 5px 8px;
+  font-size: 0.81rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-subtle);
+  border: 1px solid transparent;
+  border-radius: 9px;
+  cursor: default;
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease),
+    background-color 0.2s var(--ease), transform 0.2s var(--ease),
+    box-shadow 0.2s var(--ease);
+}
+
+.skill:hover {
+  color: var(--text);
+  background: var(--bg-elevated);
+  /* color-mix ties the hover ring to each logo's own brand color. */
+  border-color: color-mix(in srgb, var(--brand) 55%, transparent);
+  box-shadow: 0 3px 12px -6px var(--brand);
+  transform: translateY(-2px);
+}
+
+[data-theme='dark'] .skill:hover {
+  border-color: color-mix(in srgb, var(--brand-dark) 45%, transparent);
+  box-shadow: 0 3px 12px -6px var(--brand-dark);
+}
+
+.skill__logo {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  color: var(--brand);
+  /* Restrained by default; full brand color on hover keeps the grid calm. */
+  filter: saturate(0.82);
+  transition: filter 0.2s var(--ease), transform 0.2s var(--ease);
+}
+
+.skill:hover .skill__logo {
+  filter: saturate(1.15);
+  transform: scale(1.08);
+}
+
+[data-theme='dark'] .skill__logo {
+  color: var(--brand-dark);
+}
+
+/* Monogram tile for names with no available brand logo. */
+.skill__logo--text {
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 5px;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: #fff;
+  background: var(--brand);
+  filter: none;
+}
+
+[data-theme='dark'] .skill__logo--text {
+  background: var(--brand-dark);
+}
+
+.skill__name {
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  /* Six bordered cards stack up to a lot of repeated chrome. Collapse them into
+     one card with dividers, which reclaims roughly a screen of height. */
+  .skills {
+    gap: 0;
+    padding: 2px 16px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  .skills__group {
+    padding: 16px 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+  }
+
+  .skills__group:hover {
+    box-shadow: none;
+  }
+
+  .skills__group + .skills__group {
+    border-top: 1px dashed var(--border);
+  }
+
+  .skills__group-title {
+    margin-bottom: 12px;
+  }
+
+  .skills__list {
+    gap: 6px;
+  }
+
+  .skill {
+    gap: 7px;
+    padding: 6px 11px 6px 8px;
+    font-size: 0.81rem;
+  }
+
+  .skill:hover {
+    transform: none;
+  }
+
+  .skill__logo {
+    width: 15px;
+    height: 15px;
+  }
+
+  .skill__logo--text {
+    width: 16px;
+    height: 16px;
+    font-size: 0.55rem;
+  }
+}

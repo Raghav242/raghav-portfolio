@@ -1,0 +1,87 @@
+# Raghavendra Kulkarni — Portfolio
+
+A responsive, minimalist personal portfolio built with React and Vite. Light mode by
+default with a dark mode toggle that remembers your choice.
+
+## Running it
+
+```bash
+npm install
+npm run dev      # http://localhost:5173
+npm run build    # production bundle in dist/
+npm run preview  # serve the built bundle locally
+```
+
+## Where things live
+
+| Path | What it is |
+| --- | --- |
+| `src/data/content.js` | **All site copy** — profile, experience, projects, skills, links |
+| `src/data/brandIcons.js` | Auto-generated skill logos — don't edit by hand |
+| `src/components/` | One `.jsx` + `.css` pair per section |
+| `src/hooks/` | Theme persistence, scroll-spy nav, scroll-reveal animation |
+| `src/index.css` | Design tokens (colors, spacing, radii) and shared primitives |
+| `scripts/` | Brand-icon generator |
+| `public/` | Profile photo, resume PDF, favicon |
+
+To change anything textual, edit `src/data/content.js` — no component needs touching.
+
+## Skill logos
+
+Each entry in `skills` has a `slug` naming a [Simple Icons](https://simpleicons.org) logo.
+After adding or changing a slug, run:
+
+```bash
+npm run icons
+```
+
+That regenerates `src/data/brandIcons.js` with only the logos actually in use, and prints a
+warning for any slug it couldn't resolve. The generator also derives a per-theme color for
+each logo, so near-black marks stay visible in dark mode and pale ones stay visible in light.
+
+A `slug: null` entry renders a colored monogram tile instead, using its `hex`. That's the
+escape hatch for names Simple Icons doesn't carry — Java, AWS, Azure, and OpenAI were all
+removed from the set for trademark reasons. An explicit `hex` also overrides a logo's own
+color, which is how Java borrows the OpenJDK mark while keeping Java orange.
+
+## Company logos
+
+Each `experience` entry points at a file in `public/logos/`. Swap in a better asset any time
+— just keep the path in `content.js` in sync. If the file is missing or fails to load, the
+card falls back to the company initials automatically, so nothing ever renders broken.
+
+## Before you deploy
+
+1. **Fill in the placeholder projects.** Three cards carry `placeholder: true`, which renders
+   a dashed border and a "Planned" badge. Replace the copy and drop the flag to promote them.
+2. **Add project links.** Each entry in `projects` has `links: { github, demo }` set to
+   `null`; fill them in and the icon buttons appear automatically.
+3. **Refresh the resume.** `public/Raghavendra-Kulkarni-Resume.pdf` is what the download
+   buttons serve — replace the file whenever your resume changes.
+4. **If you swap the photo.** `public/profile1.jpg` is the live headshot. A non-square
+   replacement may need an `object-position` tweak in `src/components/Hero.css`.
+
+## Theming
+
+Colors live as CSS custom properties in `src/index.css`: `:root` for light,
+`[data-theme='dark']` for dark. Change `--accent` in both blocks to re-skin the whole site.
+
+Light is the default for every first-time visitor — the OS `prefers-color-scheme` setting is
+deliberately ignored. Dark mode is opt-in via the toggle, and that choice is remembered in
+`localStorage` under `portfolio-theme`. An inline script in `index.html` applies a stored
+dark preference before first paint so returning visitors never get a flash of white.
+
+To follow the OS preference instead, restore the `matchMedia` check in
+`src/hooks/useTheme.js` and in that inline script — both have to agree, or the page will
+flash the wrong theme on load.
+
+## Deploying
+
+The build is fully static, so any host works. For **Vercel** or **Netlify**, point the
+project at this repo with build command `npm run build` and output directory `dist`.
+
+For **GitHub Pages**, add a `base` to `vite.config.js` matching your repo name:
+
+```js
+export default defineConfig({ plugins: [react()], base: '/your-repo-name/' })
+```

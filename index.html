@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>Raghavendra Kulkarni — Software Engineer</title>
+    <meta
+      name="description"
+      content="Raghavendra Kulkarni — Software Engineer in Boston, MA. Backend, full-stack, and AI engineering with Java, Spring Boot, Python, React, and cloud infrastructure. MS Computer Science at Northeastern University."
+    />
+    <meta name="author" content="Raghavendra Kulkarni" />
+    <meta name="theme-color" content="#fbfbfd" />
+
+    <!-- Open Graph / social previews -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Raghavendra Kulkarni — Software Engineer" />
+    <meta
+      property="og:description"
+      content="Backend, full-stack, and AI engineering. MS Computer Science at Northeastern University, based in Boston, MA."
+    />
+    <meta property="og:image" content="/profile1.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      // Apply the saved theme before first paint so dark mode never flashes white.
+      // Light is the default; the OS preference is deliberately not consulted.
+      (function () {
+        try {
+          var stored = localStorage.getItem('portfolio-theme')
+          if (stored !== 'dark') return
+          document.documentElement.setAttribute('data-theme', 'dark')
+          document
+            .querySelector('meta[name="theme-color"]')
+            .setAttribute('content', '#0c0e13')
+        } catch (e) {}
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
