@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { navItems, profile } from '../data/content'
 import { useScrollSpy } from '../hooks/useScrollSpy'
+import { asset } from '../lib/asset'
 import { CloseIcon, MenuIcon, MoonIcon, SunIcon } from './Icons'
 import './Navbar.css'
 
@@ -73,7 +74,7 @@ export default function Navbar({ theme, onToggleTheme }) {
             {isDark ? <SunIcon /> : <MoonIcon />}
           </button>
 
-          <a className="btn btn--primary nav__cta" href={profile.resume} download>
+          <a className="btn btn--primary nav__cta" href={asset(profile.resume)} download>
             Resume
           </a>
 
@@ -104,7 +105,7 @@ export default function Navbar({ theme, onToggleTheme }) {
               {item.label}
             </a>
           ))}
-          <a className="btn btn--primary nav__sheet-cta" href={profile.resume} download>
+          <a className="btn btn--primary nav__sheet-cta" href={asset(profile.resume)} download>
             Download Resume
           </a>
         </nav>

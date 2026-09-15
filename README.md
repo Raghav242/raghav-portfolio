@@ -40,7 +40,7 @@ Outside of work, you'll usually find me at the gym, running, exploring somewhere
 
 ## Find me
 
-* **Portfolio** — [raghav242.github.io/Raghavendra-Portfolio](https://raghav242.github.io/Raghavendra-Portfolio/)
+* **Portfolio** — [raghav242.github.io/raghav-portfolio](https://raghav242.github.io/raghav-portfolio/)
 * **LinkedIn** — [raghavendra-kulkarni](https://www.linkedin.com/in/raghavendra-kulkarni-599815185/)
 * **GitHub** — [Raghav242](https://github.com/Raghav242)
 * **Email** — [kulkarni.ragh@northeastern.edu](mailto:kulkarni.ragh@northeastern.edu)

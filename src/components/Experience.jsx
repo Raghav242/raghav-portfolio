@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { experience } from '../data/content'
 import { useMediaQuery } from '../hooks/useMediaQuery'
+import { asset } from '../lib/asset'
 import Section from './Section'
 import './Experience.css'
 
@@ -40,7 +41,12 @@ function CompanyLogo({ src, initials, company }) {
 
   return (
     <span className="job__logo">
-      <img src={src} alt={`${company} logo`} loading="lazy" onError={() => setFailed(true)} />
+      <img
+        src={asset(src)}
+        alt={`${company} logo`}
+        loading="lazy"
+        onError={() => setFailed(true)}
+      />
     </span>
   )
 }

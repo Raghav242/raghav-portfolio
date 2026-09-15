@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { profile, stats } from '../data/content'
+import { asset } from '../lib/asset'
 import {
   ArrowRightIcon,
   CodeIcon,
@@ -29,7 +30,7 @@ export default function Hero() {
               <span className="hero__avatar-fallback">{profile.initials}</span>
             ) : (
               <img
-                src={profile.photo}
+                src={asset(profile.photo)}
                 alt={`Portrait of ${profile.name}`}
                 onError={() => setPhotoFailed(true)}
                 width="150"
@@ -61,7 +62,7 @@ export default function Hero() {
             <CodeIcon />
             View My Work
           </a>
-          <a className="btn btn--ghost" href={profile.resume} download>
+          <a className="btn btn--ghost" href={asset(profile.resume)} download>
             <FileIcon />
             Download Resume
           </a>
