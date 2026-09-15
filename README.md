@@ -1,87 +1,46 @@
-# Raghavendra Kulkarni — Portfolio
+# Hey, I'm Raghav 👋
 
-A responsive, minimalist personal portfolio built with React and Vite. Light mode by
-default with a dark mode toggle that remembers your choice.
+I'm a software engineer based in Boston, originally from Bengaluru, with experience building backend systems, full-stack applications, and production AI infrastructure.
 
-## Running it
+I enjoy working on problems where performance, reliability, and user experience meet—whether that means optimizing a slow data-intensive workflow, designing a Spring Boot service, building an AI application grounded in real-world data, or scaling GPU-backed workloads beyond the demo stage.
 
-```bash
-npm install
-npm run dev      # http://localhost:5173
-npm run build    # production bundle in dist/
-npm run preview  # serve the built bundle locally
-```
+I'm currently completing my Master's in Computer Science at Northeastern University. Before graduate school, I worked as a Software Engineer at Cognizant, building internal platforms and cloud automation. More recently, I worked at Vicor Corporation on enterprise applications involving Java, React, Oracle, and SAP-integrated engineering data. At Northeastern's DASH AI Hub, I build AI tools for education using RAG, agent workflows, and scalable model-serving infrastructure.
 
-## Where things live
+## What I work with
 
-| Path | What it is |
-| --- | --- |
-| `src/data/content.js` | **All site copy** — profile, experience, projects, skills, links |
-| `src/data/brandIcons.js` | Auto-generated skill logos — don't edit by hand |
-| `src/components/` | One `.jsx` + `.css` pair per section |
-| `src/hooks/` | Theme persistence, scroll-spy nav, scroll-reveal animation |
-| `src/index.css` | Design tokens (colors, spacing, radii) and shared primitives |
-| `scripts/` | Brand-icon generator |
-| `public/` | Profile photo, resume PDF, favicon |
+* **Backend:** Java, Spring Boot, Python, Flask, FastAPI, Node.js, REST APIs
+* **Frontend:** React, Next.js, Angular, TypeScript
+* **Data:** PostgreSQL, MySQL, Oracle, MongoDB, Qdrant, Pinecone
+* **AI:** RAG, LlamaIndex, LangGraph, Whisper, open-source LLMs
+* **Infrastructure:** AWS, Docker, Kubernetes, GitHub Actions, Jenkins, RabbitMQ
 
-To change anything textual, edit `src/data/content.js` — no component needs touching.
+## Things I believe, in no particular order
 
-## Skill logos
+**Fast is a feature.** Nobody files a ticket saying, “This page is delightful to wait for.” Latency is the one bug every user experiences.
 
-Each entry in `skills` has a `slug` naming a [Simple Icons](https://simpleicons.org) logo.
-After adding or changing a slug, run:
+**Boring technology is underrated.** The interesting part of a system should be what it accomplishes, not how many fashionable tools it uses.
 
-```bash
-npm run icons
-```
+**If it isn't observable, it isn't finished.** Good logs, meaningful metrics, and useful dashboards turn production problems into answerable questions.
 
-That regenerates `src/data/brandIcons.js` with only the logos actually in use, and prints a
-warning for any slug it couldn't resolve. The generator also derives a per-theme color for
-each logo, so near-black marks stay visible in dark mode and pale ones stay visible in light.
+**The demo is the easy part.** Getting an AI model to produce an impressive response is only the beginning. Making it dependable under concurrency, on real data, and with limited infrastructure is the actual engineering work.
 
-A `slug: null` entry renders a colored monogram tile instead, using its `hex`. That's the
-escape hatch for names Simple Icons doesn't carry — Java, AWS, Azure, and OpenAI were all
-removed from the set for trademark reasons. An explicit `hex` also overrides a logo's own
-color, which is how Java borrows the OpenJDK mark while keeping Java orange.
+**Build for the person who inherits it.** Clear code, useful tests, and logs that explain what happened are part of the product—not cleanup tasks.
 
-## Company logos
+## Beyond the code
 
-Each `experience` entry points at a file in `public/logos/`. Swap in a better asset any time
-— just keep the path in `content.js` in sync. If the file is missing or fails to load, the
-card falls back to the company initials automatically, so nothing ever renders broken.
+Outside of work, you'll usually find me at the gym, running, exploring somewhere around New England, or looking for a good cup of coffee. I'm also frequently working through a new engineering topic or convincing myself that one more side project is a reasonable idea.
 
-## Before you deploy
+## Currently
 
-1. **Fill in the placeholder projects.** Three cards carry `placeholder: true`, which renders
-   a dashed border and a "Planned" badge. Replace the copy and drop the flag to promote them.
-2. **Add project links.** Each entry in `projects` has `links: { github, demo }` set to
-   `null`; fill them in and the icon buttons appear automatically.
-3. **Refresh the resume.** `public/Raghavendra-Kulkarni-Resume.pdf` is what the download
-   buttons serve — replace the file whenever your resume changes.
-4. **If you swap the photo.** `public/profile1.jpg` is the live headshot. A non-square
-   replacement may need an `object-position` tweak in `src/components/Hero.css`.
+* 🎓 Completing an MS in Computer Science at Northeastern University — December 2026
+* 🧪 Building RAG pipelines, agent workflows, and AI infrastructure at the DASH AI Hub
+* 💼 Exploring full-time software engineering opportunities
+* 📚 Deepening my knowledge of distributed systems, system design, and applied AI
+* ☕ Open to conversations about engineering, AI, interesting projects, and coffee
 
-## Theming
+## Find me
 
-Colors live as CSS custom properties in `src/index.css`: `:root` for light,
-`[data-theme='dark']` for dark. Change `--accent` in both blocks to re-skin the whole site.
-
-Light is the default for every first-time visitor — the OS `prefers-color-scheme` setting is
-deliberately ignored. Dark mode is opt-in via the toggle, and that choice is remembered in
-`localStorage` under `portfolio-theme`. An inline script in `index.html` applies a stored
-dark preference before first paint so returning visitors never get a flash of white.
-
-To follow the OS preference instead, restore the `matchMedia` check in
-`src/hooks/useTheme.js` and in that inline script — both have to agree, or the page will
-flash the wrong theme on load.
-
-## Deploying
-
-The build is fully static, so any host works. For **Vercel** or **Netlify**, point the
-project at this repo with build command `npm run build` and output directory `dist`.
-
-For **GitHub Pages**, add a `base` to `vite.config.js` matching your repo name:
-
-```js
-export default defineConfig({ plugins: [react()], base: '/your-repo-name/' })
-```
+* **Portfolio** — [raghav242.github.io/Raghavendra-Portfolio](https://raghav242.github.io/Raghavendra-Portfolio/)
+* **LinkedIn** — [raghavendra-kulkarni](https://www.linkedin.com/in/raghavendra-kulkarni-599815185/)
+* **GitHub** — [Raghav242](https://github.com/Raghav242)
+* **Email** — [kulkarni.ragh@northeastern.edu](mailto:kulkarni.ragh@northeastern.edu)
