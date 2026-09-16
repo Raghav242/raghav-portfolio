@@ -1,9 +1,14 @@
+import { useState } from 'react'
 import { about, education } from '../data/content'
 import { GraduationIcon } from './Icons'
 import Section from './Section'
 import './About.css'
 
 export default function About() {
+  // Phones show a trimmed lead with the rest behind a tap; from 640px up the
+  // CSS lifts the clamp and hides the toggle, so this state stops mattering.
+  const [introExpanded, setIntroExpanded] = useState(false)
+
   return (
     <Section
       id="about"
@@ -14,11 +19,26 @@ export default function About() {
     >
       <div className="about">
         <div className="about__main">
-          <div className="about__prose reveal">
+          <div
+            id="about-intro"
+            className={`about__prose reveal ${
+              introExpanded ? '' : 'about__prose--clamped'
+            }`}
+          >
             {about.intro.map((paragraph, index) => (
               <p key={index}>{paragraph}</p>
             ))}
           </div>
+
+          <button
+            type="button"
+            className="about__more"
+            onClick={() => setIntroExpanded((open) => !open)}
+            aria-expanded={introExpanded}
+            aria-controls="about-intro"
+          >
+            {introExpanded ? 'Show less' : 'Read more'}
+          </button>
 
           <ul className="capabilities">
             {about.capabilities.map((capability, index) => (

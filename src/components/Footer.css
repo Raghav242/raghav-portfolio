@@ -1,16 +1,16 @@
 .footer {
   border-top: 1px solid var(--border);
   background: var(--bg);
-  padding-top: 44px;
+  padding-top: 26px;
 }
 
 .footer__inner {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  padding-bottom: 32px;
+  align-items: flex-start;
+  gap: 16px;
+  padding-bottom: 20px;
 }
 
 .footer__brand {
@@ -24,18 +24,18 @@
 }
 
 .footer__role {
-  font-size: 0.84rem;
+  font-size: 0.82rem;
   color: var(--text-muted);
 }
 
 .footer__links {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px 20px;
+  gap: 4px 16px;
 }
 
 .footer__links a {
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   color: var(--text-secondary);
 }
 
@@ -66,41 +66,52 @@
 
 .footer__base {
   border-top: 1px solid var(--border);
-  padding-block: 20px 26px;
+  /* Clears the home-indicator area on iOS. */
+  padding-block: 14px calc(18px + env(safe-area-inset-bottom));
 }
 
 .footer__base p {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--text-muted);
   text-align: center;
 }
 
-@media (max-width: 720px) {
-  .footer__inner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-
-@media (max-width: 640px) {
+@media (min-width: 640px) {
   .footer {
-    padding-top: 30px;
+    padding-top: 44px;
   }
 
   .footer__inner {
-    gap: 18px;
-    padding-bottom: 22px;
+    gap: 24px;
+    padding-bottom: 32px;
   }
 
-  .footer__links {
-    gap: 4px 16px;
-  }
-
-  .footer__links a {
+  .footer__role {
     font-size: 0.84rem;
   }
 
+  .footer__links {
+    gap: 6px 20px;
+  }
+
+  .footer__links a {
+    font-size: 0.88rem;
+  }
+
   .footer__base {
-    padding-block: 14px 20px;
+    padding-block: 20px calc(26px + env(safe-area-inset-bottom));
+  }
+
+  .footer__base p {
+    font-size: 0.8rem;
+  }
+}
+
+/* Wide enough for the brand, links and socials to share one row. */
+@media (min-width: 900px) {
+  .footer__inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 }

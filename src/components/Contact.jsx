@@ -16,6 +16,9 @@ const channels = [
     value: profile.email,
     href: `mailto:${profile.email}`,
     Icon: MailIcon,
+    // The CTA button is the same mailto link, so this row is hidden on phones
+    // and rejoins the list from 640px up. See Contact.css.
+    duplicatesCta: true,
   },
   {
     label: 'Phone',
@@ -67,8 +70,12 @@ export default function Contact() {
         </div>
 
         <ul className="contact__channels">
-          {channels.map(({ label, value, href, external, Icon }, index) => (
-            <li key={label} className="reveal" style={{ '--reveal-delay': `${index * 70}ms` }}>
+          {channels.map(({ label, value, href, external, Icon, duplicatesCta }, index) => (
+            <li
+              key={label}
+              className={`reveal ${duplicatesCta ? 'contact__channel--duplicate' : ''}`}
+              style={{ '--reveal-delay': `${index * 70}ms` }}
+            >
               <a
                 className="channel"
                 href={href}

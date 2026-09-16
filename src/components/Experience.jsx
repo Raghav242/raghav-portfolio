@@ -6,7 +6,7 @@ import Section from './Section'
 import './Experience.css'
 
 /** Height of the always-visible slice of the description on mobile, in px. */
-const PREVIEW_HEIGHT = 88
+const PREVIEW_HEIGHT = 72
 
 function ChevronIcon() {
   return (
@@ -245,23 +245,29 @@ function AccordionLayout({ activeId, onSelect }) {
 }
 
 export default function Experience() {
-  const isDesktop = useMediaQuery('(min-width: 901px)')
-  const [activeId, setActiveId] = useState(experience[0].id)
+  // Matches the 900px breakpoint the stylesheets switch on.
+  const isDesktop = useMediaQuery('(min-width: 900px)')
+
+  // The tablist always needs a selection; the accordion does not. Keeping them
+  // apart lets every card start collapsed on mobile, which is worth about a
+  // screen of scrolling, without leaving the desktop panel empty.
+  const [selectedId, setSelectedId] = useState(experience[0].id)
+  const [openId, setOpenId] = useState(null)
 
   return (
     <Section
       id="experience"
       eyebrow="Experience"
       title="Where I've worked"
-      lede="Select a company to read the detail."
+      lede={isDesktop ? 'Select a company to read the detail.' : 'Tap a role to expand it.'}
     >
       {/* One stable wrapper carries the reveal, so swapping layouts on resize
           can't strip the observer's flag from a freshly mounted subtree. */}
       <div className="reveal">
         {isDesktop ? (
-          <SplitLayout activeId={activeId} onSelect={setActiveId} />
+          <SplitLayout activeId={selectedId} onSelect={setSelectedId} />
         ) : (
-          <AccordionLayout activeId={activeId} onSelect={setActiveId} />
+          <AccordionLayout activeId={openId} onSelect={setOpenId} />
         )}
       </div>
     </Section>

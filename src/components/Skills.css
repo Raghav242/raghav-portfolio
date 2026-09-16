@@ -1,32 +1,33 @@
+/* Mobile: six bordered cards stack up to a lot of repeated chrome. Collapsing
+   them into one card with dividers reclaims roughly a screen of height. */
 .skills {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-  gap: 12px;
-}
-
-.skills__group {
-  padding: 16px 16px 18px;
+  gap: 0;
+  padding: 2px 14px;
   background: var(--bg-elevated);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+}
+
+.skills__group {
+  padding: 13px 0;
   transition: border-color 0.22s var(--ease), box-shadow 0.22s var(--ease);
 }
 
-.skills__group:hover {
-  border-color: var(--border-strong);
-  box-shadow: var(--shadow-sm);
+.skills__group + .skills__group {
+  border-top: 1px dashed var(--border);
 }
 
 .skills__group-title {
   display: flex;
   align-items: center;
   gap: 9px;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin-bottom: 12px;
+  margin-bottom: 9px;
 }
 
 .skills__group-title::after {
@@ -39,7 +40,7 @@
 .skills__list {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 5px;
 }
 
 /* Skill pill ------------------------------------------------------------- */
@@ -47,47 +48,49 @@
 .skill {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 5px 11px 5px 8px;
-  font-size: 0.81rem;
+  gap: 6px;
+  padding: 5px 9px 5px 7px;
+  font-size: 0.76rem;
   font-weight: 500;
   color: var(--text-secondary);
   background: var(--bg-subtle);
   border: 1px solid transparent;
-  border-radius: 9px;
+  border-radius: 8px;
   cursor: default;
   transition: color 0.2s var(--ease), border-color 0.2s var(--ease),
     background-color 0.2s var(--ease), transform 0.2s var(--ease),
     box-shadow 0.2s var(--ease);
 }
 
-.skill:hover {
-  color: var(--text);
-  background: var(--bg-elevated);
-  /* color-mix ties the hover ring to each logo's own brand color. */
-  border-color: color-mix(in srgb, var(--brand) 55%, transparent);
-  box-shadow: 0 3px 12px -6px var(--brand);
-  transform: translateY(-2px);
-}
+@media (hover: hover) {
+  .skill:hover {
+    color: var(--text);
+    background: var(--bg-elevated);
+    /* color-mix ties the hover ring to each logo's own brand color. */
+    border-color: color-mix(in srgb, var(--brand) 55%, transparent);
+    box-shadow: 0 3px 12px -6px var(--brand);
+    transform: translateY(-2px);
+  }
 
-[data-theme='dark'] .skill:hover {
-  border-color: color-mix(in srgb, var(--brand-dark) 45%, transparent);
-  box-shadow: 0 3px 12px -6px var(--brand-dark);
+  [data-theme='dark'] .skill:hover {
+    border-color: color-mix(in srgb, var(--brand-dark) 45%, transparent);
+    box-shadow: 0 3px 12px -6px var(--brand-dark);
+  }
+
+  .skill:hover .skill__logo {
+    filter: saturate(1.15);
+    transform: scale(1.08);
+  }
 }
 
 .skill__logo {
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
   flex-shrink: 0;
   color: var(--brand);
   /* Restrained by default; full brand color on hover keeps the grid calm. */
   filter: saturate(0.82);
   transition: filter 0.2s var(--ease), transform 0.2s var(--ease);
-}
-
-.skill:hover .skill__logo {
-  filter: saturate(1.15);
-  transform: scale(1.08);
 }
 
 [data-theme='dark'] .skill__logo {
@@ -98,10 +101,10 @@
 .skill__logo--text {
   display: grid;
   place-items: center;
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
   border-radius: 5px;
-  font-size: 0.55rem;
+  font-size: 0.52rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1;
@@ -118,33 +121,36 @@
   white-space: nowrap;
 }
 
-@media (max-width: 640px) {
-  /* Six bordered cards stack up to a lot of repeated chrome. Collapse them into
-     one card with dividers, which reclaims roughly a screen of height. */
+/* Separate cards in a responsive grid once two can sit side by side. */
+@media (min-width: 640px) {
   .skills {
-    gap: 0;
-    padding: 2px 16px;
-    background: var(--bg-elevated);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-  }
-
-  .skills__group {
-    padding: 16px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 12px;
+    padding: 0;
     background: none;
     border: none;
     border-radius: 0;
   }
 
-  .skills__group:hover {
-    box-shadow: none;
+  .skills__group {
+    padding: 16px 16px 18px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
   }
 
   .skills__group + .skills__group {
-    border-top: 1px dashed var(--border);
+    border-top: 1px solid var(--border);
+  }
+
+  .skills__group:hover {
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-sm);
   }
 
   .skills__group-title {
+    font-size: 0.72rem;
     margin-bottom: 12px;
   }
 
@@ -154,12 +160,9 @@
 
   .skill {
     gap: 7px;
-    padding: 6px 11px 6px 8px;
+    padding: 5px 11px 5px 8px;
     font-size: 0.81rem;
-  }
-
-  .skill:hover {
-    transform: none;
+    border-radius: 9px;
   }
 
   .skill__logo {
@@ -171,5 +174,23 @@
     width: 16px;
     height: 16px;
     font-size: 0.55rem;
+  }
+}
+
+@media (min-width: 900px) and (max-height: 760px) {
+  .skills {
+    gap: 10px;
+  }
+
+  .skills__group {
+    padding: 12px 14px 13px;
+  }
+
+  .skills__group-title {
+    margin-bottom: 8px;
+  }
+
+  .skills__list {
+    gap: 5px;
   }
 }

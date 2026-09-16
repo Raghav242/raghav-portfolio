@@ -21,7 +21,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 12px;
+  /* Nothing in the bar may push the burger past the right edge. */
+  min-width: 0;
 }
 
 /* Brand ------------------------------------------------------------------ */
@@ -30,6 +32,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  min-width: 0;
   color: var(--text);
   font-weight: 700;
   letter-spacing: -0.01em;
@@ -42,6 +45,7 @@
 .nav__monogram {
   display: grid;
   place-items: center;
+  flex-shrink: 0;
   width: 34px;
   height: 34px;
   border-radius: 10px;
@@ -58,10 +62,21 @@
   transform: rotate(-6deg) scale(1.05);
 }
 
+/* The name alongside the monogram is the first thing to go when the bar is
+   short on room — the monogram already identifies the site. */
+.nav__brand-text {
+  display: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* Links ------------------------------------------------------------------ */
 
+/* Six section links need ~500px of their own, so they stay hidden behind the
+   burger until the desktop breakpoint. */
 .nav__links {
-  display: flex;
+  display: none;
   align-items: center;
   gap: 2px;
   padding: 4px;
@@ -93,12 +108,14 @@
 .nav__actions {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
   gap: 8px;
 }
 
 .nav__icon-btn {
   display: grid;
   place-items: center;
+  flex-shrink: 0;
   width: 38px;
   height: 38px;
   border-radius: 10px;
@@ -116,13 +133,17 @@
   transform: translateY(-1px);
 }
 
-.nav__cta {
+/* Two class names deep so it beats `.btn { display: inline-flex }` regardless
+   of which stylesheet the bundler emits first. */
+.nav .nav__cta {
+  display: none;
+  min-height: 0;
   padding: 9px 18px;
   font-size: 0.88rem;
 }
 
 .nav__burger {
-  display: none;
+  display: grid;
 }
 
 /* Mobile sheet ----------------------------------------------------------- */
@@ -133,6 +154,9 @@
   background: var(--bg-glass);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  /* The link list can outgrow a short landscape viewport. */
+  overflow-y: auto;
+  overscroll-behavior: contain;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.22s var(--ease);
@@ -147,7 +171,7 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
-  padding: 20px 24px 32px;
+  padding: 16px var(--gutter) calc(24px + env(safe-area-inset-bottom));
   background: var(--bg-elevated);
   border-bottom: 1px solid var(--border);
   box-shadow: var(--shadow-lg);
@@ -166,24 +190,38 @@
   background: var(--accent-soft);
 }
 
-.nav__sheet-cta {
-  margin-top: 14px;
+.nav .nav__sheet-cta {
+  display: inline-flex;
+  margin-top: 12px;
   width: 100%;
 }
 
-@media (max-width: 900px) {
-  .nav__links {
-    display: none;
-  }
-
-  .nav__burger {
-    display: grid;
+/* Wide enough for the name to sit beside the monogram. */
+@media (min-width: 420px) {
+  .nav__brand-text {
+    display: block;
   }
 }
 
-@media (max-width: 480px) {
-  .nav__cta,
-  .nav__brand-text {
+/* ...and for the Resume button to join it without crowding the burger. */
+@media (min-width: 560px) {
+  .nav .nav__cta {
+    display: inline-flex;
+  }
+}
+
+/* Full desktop bar: inline links, no burger. Matches the `min-width: 900px`
+   query that Experience reads to pick its layout. */
+@media (min-width: 900px) {
+  .nav__inner {
+    gap: 20px;
+  }
+
+  .nav__links {
+    display: flex;
+  }
+
+  .nav__burger {
     display: none;
   }
 }

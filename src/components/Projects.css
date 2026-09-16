@@ -1,14 +1,32 @@
+/* Mobile: stacking five cards is a lot of scrolling. Swiping horizontally keeps
+   the whole set reachable without growing the page, and the next card peeks in
+   at the edge so it's obvious there's more. */
 .projects {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-  gap: 14px;
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  /* Bleed to the screen edges so cards scroll out of frame cleanly. The
+     section clips the overhang (`overflow-x: clip` in index.css). */
+  margin-inline: calc(var(--gutter) * -1);
+  padding: 2px var(--gutter) 10px;
+}
+
+.projects::-webkit-scrollbar {
+  display: none;
 }
 
 .project {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 18px;
+  flex: 0 0 86%;
+  min-width: 0;
+  padding: 16px;
+  scroll-snap-align: center;
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -29,14 +47,16 @@
   transition: transform 0.32s var(--ease);
 }
 
-.project:hover {
-  border-color: var(--border-strong);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-3px);
-}
+@media (hover: hover) {
+  .project:hover {
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+  }
 
-.project:hover::before {
-  transform: scaleX(1);
+  .project:hover::before {
+    transform: scaleX(1);
+  }
 }
 
 .project__top {
@@ -50,8 +70,10 @@
 .project__name {
   display: flex;
   align-items: center;
-  gap: 9px;
-  font-size: 1.04rem;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+  font-size: 1rem;
   font-weight: 700;
 }
 
@@ -67,6 +89,7 @@
 }
 
 .project__badge {
+  flex-shrink: 0;
   font-size: 0.63rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -80,6 +103,7 @@
 
 .project__links {
   display: flex;
+  flex-shrink: 0;
   gap: 6px;
 }
 
@@ -100,8 +124,8 @@
 }
 
 .project__blurb {
-  font-size: 0.89rem;
-  line-height: 1.62;
+  font-size: 0.86rem;
+  line-height: 1.6;
   color: var(--text-secondary);
 }
 
@@ -114,7 +138,7 @@
 .project__highlights li {
   position: relative;
   padding-left: 18px;
-  font-size: 0.82rem;
+  font-size: 0.79rem;
   line-height: 1.5;
   color: var(--text-muted);
 }
@@ -137,13 +161,13 @@
   flex-wrap: wrap;
   gap: 6px;
   margin-top: auto;
-  padding-top: 16px;
+  padding-top: 14px;
 }
 
 .projects__more {
-  margin-top: 18px;
+  margin-top: 14px;
   text-align: center;
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   color: var(--text-muted);
 }
 
@@ -162,49 +186,37 @@
   transform: translateX(3px);
 }
 
-@media (max-width: 640px) {
-  /* Five stacked cards is a lot of scrolling. Swiping horizontally keeps the
-     whole set reachable without growing the page. The next card peeks in at
-     the edge so it's obvious there's more. */
-  .projects {
-    display: flex;
-    gap: 12px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    overscroll-behavior-x: contain;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    /* Bleed to the screen edges so cards scroll out of frame cleanly. */
-    margin-inline: -18px;
-    padding: 2px 18px 10px;
+/* Two cards at a time still swiping — at this width a full-width card leaves
+   too much empty space beside it. */
+@media (min-width: 560px) {
+  .project {
+    flex-basis: 54%;
   }
+}
 
-  .projects::-webkit-scrollbar {
-    display: none;
+/* Roomy enough for a real grid; the carousel retires. */
+@media (min-width: 720px) {
+  .projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 14px;
+    overflow-x: visible;
+    margin-inline: 0;
+    padding: 0;
   }
 
   .project {
-    flex: 0 0 86%;
-    min-width: 0;
-    padding: 20px;
-    scroll-snap-align: center;
-  }
-
-  .project:hover {
-    transform: none;
+    flex: initial;
+    padding: 18px;
   }
 
   .project__name {
-    font-size: 1.08rem;
+    font-size: 1.04rem;
   }
 
   .project__blurb {
     font-size: 0.89rem;
-  }
-
-  .project__highlights {
-    margin-top: 13px;
-    gap: 6px;
+    line-height: 1.62;
   }
 
   .project__highlights li {
@@ -216,7 +228,16 @@
   }
 
   .projects__more {
-    margin-top: 20px;
-    font-size: 0.86rem;
+    margin-top: 18px;
+    font-size: 0.88rem;
+  }
+}
+
+/* A slightly smaller floor so four cards fit on one row from 1200px up
+   rather than only past 1440px — the second row was the single biggest
+   reason this section outgrew a laptop viewport. */
+@media (min-width: 1200px) {
+  .projects {
+    grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
   }
 }
