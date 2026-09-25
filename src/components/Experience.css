@@ -117,32 +117,20 @@
   margin-top: 1px;
 }
 
-.job__points {
+/* Prose, not bullets — the paragraphs read as one continuous account, so they
+   get a touch more line height than the surrounding chrome. */
+.job__narrative {
   margin-top: 14px;
 }
 
-.job__points li {
-  position: relative;
-  padding-left: 17px;
+.job__narrative p {
   font-size: 0.85rem;
-  line-height: 1.6;
+  line-height: 1.68;
   color: var(--text-secondary);
 }
 
-.job__points li + li {
-  margin-top: 7px;
-}
-
-.job__points li::before {
-  content: '';
-  position: absolute;
-  left: 2px;
-  top: 9px;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--accent);
-  opacity: 0.7;
+.job__narrative p + p {
+  margin-top: 10px;
 }
 
 .job__stack {
@@ -296,14 +284,13 @@
     font-size: 0.72rem;
   }
 
-  .job__points {
+  .job__narrative {
     margin-top: 16px;
   }
 
-  .job__points li {
+  .job__narrative p {
     font-size: 0.89rem;
-    padding-left: 19px;
-    line-height: 1.62;
+    line-height: 1.7;
   }
 
   .job__stack {
@@ -497,12 +484,12 @@
     padding: 7px 11px;
   }
 
-  .job__points {
+  .job__narrative {
     margin-top: 11px;
   }
 
-  .job__points li + li {
-    margin-top: 5px;
+  .job__narrative p + p {
+    margin-top: 8px;
   }
 
   .job__stack {

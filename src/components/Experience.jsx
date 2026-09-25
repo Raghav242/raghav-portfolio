@@ -86,11 +86,11 @@ function JobDetail({ job }) {
         </ul>
       )}
 
-      <ul className="job__points">
-        {job.points.map((point, i) => (
-          <li key={i}>{point}</li>
+      <div className="job__narrative">
+        {job.narrative.map((paragraph, i) => (
+          <p key={i}>{paragraph}</p>
         ))}
-      </ul>
+      </div>
 
       <ul className="job__stack">
         {job.stack.map((tech) => (

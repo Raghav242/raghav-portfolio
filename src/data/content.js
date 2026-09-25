@@ -33,28 +33,12 @@ export const stats = [
 ]
 
 export const about = {
-  intro: [
-    `I'm a software engineer finishing a Master's in Computer Science at Northeastern. I'm drawn to the unglamorous questions — why a request is slow, why a pipeline is flaky, why a system that worked at ten users falls over at ten thousand.`,
-    `Most of my work is backend — REST APIs, data modeling, and the caching and query layers underneath. Lately I've been building AI infrastructure at Northeastern's DASH AI Hub: retrieval pipelines over real course content, agent workflows that grade and reason, and the inference layer that keeps GPU-backed services from buckling under load.`,
-  ],
-  capabilities: [
-    {
-      title: 'Backend Engineering',
-      text: 'REST APIs, service design, data modeling, and the query and caching work underneath.',
-    },
-    {
-      title: 'Full-Stack Delivery',
-      text: 'React and Next.js frontends wired to services I also own, so features ship whole.',
-    },
-    {
-      title: 'AI Engineering',
-      text: 'RAG pipelines, LangGraph agent workflows, and inference that scales past a single GPU.',
-    },
-    {
-      title: 'Cloud & Delivery',
-      text: 'Docker, Jenkins and GitHub Actions pipelines, with Prometheus and Grafana to catch failures.',
-    },
-  ],
+intro: [
+  `Hey, I’m Raghav 👋 I’m a software engineer who likes building things that are fast, useful, and actually make it to production.`,
+  `I’ve built AI platforms that turn hours of work into minutes, backend systems handling thousands of requests a day, distributed GPU pipelines for LLM and speech workloads, and cloud automation that replaces hours of manual setup.`,
+  `I’m happiest somewhere between backend engineering, AI, and infrastructure — chasing down a slow API, designing a system that needs to scale, or figuring out how to turn a cool model into a product people can actually use.`,
+  `Fast is a feature. Boring technology is underrated. If it isn’t instrumented, it isn’t done.`,
+],
   facts: [
     { label: 'Location', value: 'Boston, MA' },
     { label: 'Expected graduation', value: 'December 2026' },
@@ -87,6 +71,9 @@ export const education = [
  * shows only `logo`, `company`, `role`, `period` and `location`; everything
  * from `summary` down lives in the detail panel. `initials` is the fallback if
  * the logo file is missing, and `metrics` may be omitted.
+ *
+ * `narrative` is an array of paragraphs — the story of the role in plain
+ * language, not a re-run of the resume bullets.
  */
 export const experience = [
   {
@@ -101,15 +88,24 @@ export const experience = [
       'Building AI systems for faculty — grading platforms, retrieval pipelines, and the inference infrastructure underneath them.',
     metrics: [
       { value: '8h → 30m', label: 'Essay grading time' },
-      { value: '3 → 40', label: 'Inference workers' },
       { value: '10+', label: 'Faculty adopted' },
+      { value: '300+', label: 'Students reached' },
     ],
-    stack: ['Next.js', 'Flask', 'LangGraph', 'LlamaIndex', 'Qdrant', 'RabbitMQ', 'Whisper'],
-    points: [
-      'Led development of an AI grading platform in Next.js, Flask, and LangGraph, cutting essay grading from 8+ hours to under 30 minutes across 10+ faculty.',
-      'Built a semantic RAG pipeline with LlamaIndex, Qdrant, and metadata filtering, validating response quality through controlled experiments and faculty feedback.',
-      'Scaled AI inference from 3 to 40 workers using shared Whisper services and RabbitMQ, eliminating GPU memory failures.',
-      'Automated AWS and on-premises deployments with Docker and GitHub Actions.',
+    stack: [
+      'Next.js',
+      'Flask',
+      'FastAPI',
+      'LangGraph',
+      'LlamaIndex',
+      'Qdrant',
+      'Celery',
+      'RabbitMQ',
+      'Redis',
+      'Whisper',
+    ],
+    narrative: [
+      `At DASH, I build AI tools for faculty and students. I helped build an essay-grading platform with Next.js, Flask, and LangGraph that cut grading time from 8+ hours to under 30 minutes and now supports 300+ students. I also built a RAG pipeline with LlamaIndex and Qdrant to bring course-specific context into the system.`,
+      `More recently, I've been building an AI presentation coach using Next.js, FastAPI, and PostgreSQL. I also built the distributed pipeline behind it using Celery, RabbitMQ, and Redis to handle transcription, LLM evaluation, and F5-TTS voice generation without slowing down the user experience.`,
     ],
   },
   {
@@ -121,18 +117,16 @@ export const experience = [
     location: 'Andover, MA',
     period: 'Jan 2026 – Aug 2026',
     summary:
-      'Built and tuned production engineering tools, from the React front end down to Oracle and the deployment pipeline.',
+      'Built the APIs behind a distributed engineering-data platform, and spent a lot of time making slow things fast.',
     metrics: [
       { value: '80s → 2s', label: 'Page latency' },
       { value: '10,000+', label: 'Daily transactions' },
       { value: '95%+', label: 'Test coverage' },
     ],
-    stack: ['React', 'Java', 'Spring Boot', 'Oracle', 'Docker', 'Jenkins', 'Grafana'],
-    points: [
-      'Developed a production BOM Viewer and REST APIs in React, Java, Spring Boot, and Oracle, batching SAP requests and adding server-side caching for 10,000+ daily transactions.',
-      'Refactored a data-intensive PCB app with lazy loading and asynchronous JavaScript, cutting page latency from 80s to 2s for 200+ engineers.',
-      'Automated Docker deployments through Jenkins CI/CD, instrumenting services with Prometheus and Grafana plus automated failure alerts.',
-      'Engineered JUnit 5 and Mockito suites to 95%+ coverage, reducing regression defects by 50%.',
+    stack: ['Java', 'Spring Boot', 'SAP ERP', 'Oracle', 'Docker', 'GitHub Actions', 'JUnit 5'],
+    narrative: [
+      `I built and scaled Java and Spring Boot REST APIs for engineering workflows, handling 10,000+ daily transactions across multiple data sources. One of my biggest improvements was taking a workflow from over 80 seconds to around 2 seconds by introducing lazy loading, request consolidation, and server-side caching, improving the experience for 200+ engineers.`,
+      `I also worked on reliability and maintainability, building CI/CD workflows with GitHub Actions and Docker and refactoring tightly coupled service and data-access code. I added JUnit 5 and Mockito test coverage across APIs, services, and integrations, helping catch regressions earlier and make the codebase easier to change safely.`,
     ],
   },
   {
@@ -144,17 +138,16 @@ export const experience = [
     location: 'Bengaluru, India',
     period: 'Oct 2022 – Aug 2024',
     summary:
-      "Shipped platform features and multi-cloud automation for SAP's provisioning tooling and Cognizant's internal portal.",
+      'Worked on a multi-cloud provisioning platform that replaced manual, SSH-based server operations.',
     metrics: [
-      { value: '−40%', label: 'Page latency' },
-      { value: '40+ hrs', label: 'Saved per deployment' },
+      { value: '40+ hrs', label: 'Saved per environment' },
+      { value: '500+', label: 'Enterprise tenants' },
       { value: '3 clouds', label: 'AWS, Azure, HANA' },
     ],
-    stack: ['React', 'Python', 'Java', 'Angular', 'AWS', 'Azure', 'SQL'],
-    points: [
-      "Implemented React interfaces and Python REST services for SAP's Service Provider Cockpit, enabling consultants to manage server provisioning and lifecycle workflows.",
-      "Extended the Cockpit's Python automation layer across AWS, Azure, and SAP HANA Cloud, eliminating 40+ hours of manual setup per environment deployment.",
-      'Migrated core OneCognizant modules from .NET to Java and Angular, optimizing SQL queries to cut page latency by 40% and eliminate recurring timeouts.',
+    stack: ['React', 'Python', 'Terraform', 'Kubernetes', 'AWS', 'Azure', 'SAP HANA Cloud'],
+    narrative: [
+      `I worked on a multi-cloud platform that automated infrastructure provisioning across AWS, Azure, and SAP HANA Cloud. I built React and Python components along with Terraform, Kubernetes, and Helm configurations to automate provisioning, scaling, and environment setup.`,
+      `I also built Python automation for infrastructure lifecycle workflows that previously required a lot of manual work. Across 500+ enterprise tenants, this eliminated roughly 40 hours of setup per environment and made deployments much more repeatable and reliable.`,
     ],
   },
   {
@@ -165,10 +158,15 @@ export const experience = [
     logo: '/logos/cognizant.png',
     location: 'Bengaluru, India',
     period: 'Apr 2022 – Sep 2022',
-    summary: 'Built a service-booking platform end to end during a six-month internship.',
-    stack: ['Angular', 'Spring Boot', 'PostgreSQL', 'JWT'],
-    points: [
-      'Built a service-booking platform using Angular and Spring Boot, integrating JWT authentication and PostgreSQL for secure booking workflows.',
+    summary: 'Migrated core modules of a high-traffic system off .NET and cleaned up the SQL underneath.',
+    metrics: [
+      { value: '−40%', label: 'Page latency' },
+      { value: '300K+', label: 'Users affected' },
+      { value: '6 mo', label: 'Internship' },
+    ],
+    stack: ['Java', 'Angular', '.NET', 'SQL'],
+    narrative: [
+      `Six months spent migrating core modules of a high-traffic distributed system from .NET onto Java and Angular. The rewrite was the visible half; the other half was untangling the SQL queries underneath it, which cut page latency by 40% and put an end to the timeouts that 300K+ users had been running into.`,
     ],
   },
 ]

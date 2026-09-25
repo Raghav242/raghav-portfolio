@@ -1,5 +1,5 @@
 /* Mobile: one column. `display: contents` flattens the two wrappers so the
-   four blocks can be resequenced independently — the scannable quick facts
+   three blocks can be resequenced independently — the scannable quick facts
    move up right behind the intro, and education drops to last. */
 .about {
   display: flex;
@@ -20,12 +20,8 @@
   order: 2;
 }
 
-.capabilities {
-  order: 3;
-}
-
 .about__education {
-  order: 4;
+  order: 3;
 }
 
 /* Intro ------------------------------------------------------------------ */
@@ -172,60 +168,6 @@
   opacity: 0.6;
 }
 
-/* Capability grid -------------------------------------------------------- */
-
-/* Two-by-two from the smallest screen up: four stacked rows of prose cost
-   about a screen of scrolling on their own. */
-.capabilities {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.capability {
-  position: relative;
-  padding: 12px 12px 14px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  transition: border-color 0.22s var(--ease), transform 0.22s var(--ease),
-    box-shadow 0.22s var(--ease);
-}
-
-@media (hover: hover) {
-  .capability:hover {
-    border-color: var(--border-strong);
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-md);
-  }
-}
-
-.capability__index {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 0.64rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: var(--accent);
-  margin-bottom: 5px;
-}
-
-.capability__title {
-  font-size: 0.86rem;
-  margin-bottom: 4px;
-}
-
-/* Clamped rather than dropped, so the detail is still there to read. */
-.capability__text {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  font-size: 0.76rem;
-  line-height: 1.5;
-  color: var(--text-muted);
-}
-
 @media (min-width: 640px) {
   .about {
     gap: 26px;
@@ -293,38 +235,15 @@
     font-size: 0.8rem;
     margin-top: 6px;
   }
-
-  .capabilities {
-    gap: 12px;
-  }
-
-  .capability {
-    padding: 16px 16px 18px;
-  }
-
-  .capability__index {
-    font-size: 0.68rem;
-    margin-bottom: 7px;
-  }
-
-  .capability__title {
-    font-size: 0.94rem;
-    margin-bottom: 5px;
-  }
-
-  .capability__text {
-    display: block;
-    font-size: 0.83rem;
-    line-height: 1.55;
-  }
 }
 
-/* Desktop: prose and capabilities on the left, the sidebar cards on the
-   right, so the section costs one column of height instead of four blocks. */
+/* Desktop: the intro on the left, the sidebar cards on the right, so the
+   section costs one column of height instead of three stacked blocks. With
+   only prose in the left column the split evens out from 1.3fr to 1.15fr. */
 @media (min-width: 900px) {
   .about {
     display: grid;
-    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
     gap: 40px;
     align-items: start;
   }
@@ -335,48 +254,42 @@
     flex-direction: column;
   }
 
-  .about__main {
-    gap: 26px;
-  }
-
   .about__side {
     gap: 16px;
   }
 
-  .capabilities {
-    padding-top: 24px;
-    border-top: 1px solid var(--border);
+  /* The prose no longer has a grid beneath it to fill the column, so it carries
+     the left side on its own and can afford the extra size. */
+  .about__prose p {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .about__prose p + p {
+    margin-top: 16px;
   }
 }
 
-/* Short desktop viewports: both columns of this section land within ~30px of
-   the fold, so the gaps and card padding give that back. */
+/* Short desktop viewports: both columns of this section land close to the
+   fold, so the leading and card padding give that back. */
 @media (min-width: 900px) and (max-height: 800px) {
   .about {
-    gap: 28px;
+    gap: 32px;
   }
 
-  .about__main {
-    gap: 20px;
+  .about__prose p {
+    font-size: 0.96rem;
+    line-height: 1.7;
   }
 
-  .capabilities {
-    gap: 10px;
-    padding-top: 18px;
-  }
-
-  .capability {
-    padding: 13px 14px 14px;
+  .about__prose p + p {
+    margin-top: 13px;
   }
 }
 
 @media (min-width: 900px) and (max-height: 760px) {
   .about {
-    gap: 22px;
-  }
-
-  .about__main {
-    gap: 14px;
+    gap: 26px;
   }
 
   .about__prose p {
@@ -385,27 +298,6 @@
 
   .about__prose p + p {
     margin-top: 10px;
-  }
-
-  .capabilities {
-    gap: 8px;
-    padding-top: 13px;
-  }
-
-  .capability {
-    padding: 10px 12px 11px;
-  }
-
-  .capability__index {
-    margin-bottom: 4px;
-  }
-
-  .capability__title {
-    margin-bottom: 3px;
-  }
-
-  .capability__text {
-    line-height: 1.48;
   }
 
   .about__fact {
@@ -431,19 +323,8 @@
 }
 
 @media (min-width: 900px) and (max-height: 640px) {
-  .about__main {
-    gap: 10px;
-  }
-
   .about__prose p {
+    font-size: 0.92rem;
     line-height: 1.55;
-  }
-
-  .capability {
-    padding: 8px 11px 9px;
-  }
-
-  .capability__text {
-    line-height: 1.42;
   }
 }

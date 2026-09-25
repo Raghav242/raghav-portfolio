@@ -14,7 +14,6 @@ export default function About() {
       id="about"
       eyebrow="About"
       title="A bit more about me"
-      lede="What I work on, and how I work."
       alt
     >
       <div className="about">
@@ -39,22 +38,6 @@ export default function About() {
           >
             {introExpanded ? 'Show less' : 'Read more'}
           </button>
-
-          <ul className="capabilities">
-            {about.capabilities.map((capability, index) => (
-              <li
-                className="capability reveal"
-                key={capability.title}
-                style={{ '--reveal-delay': `${index * 70}ms` }}
-              >
-                <span className="capability__index">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <h3 className="capability__title">{capability.title}</h3>
-                <p className="capability__text">{capability.text}</p>
-              </li>
-            ))}
-          </ul>
         </div>
 
         <aside className="about__side">

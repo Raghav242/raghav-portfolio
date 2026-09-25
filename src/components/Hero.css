@@ -327,6 +327,21 @@
   }
 }
 
+/* Laptops and up have the room for a larger portrait. Declared ahead of the
+   short-viewport block below so that block's shrink still wins on equal
+   specificity. */
+@media (min-width: 900px) {
+  .hero__avatar {
+    width: 156px;
+    height: 156px;
+    padding: 5px;
+  }
+
+  .hero__avatar-fallback {
+    font-size: 3.1rem;
+  }
+}
+
 /* The hero's own content — not `min-height` — is what sets its floor, so on a
    short viewport it has to give up real height rather than just padding. The
    portrait shrinks and the stack tightens; nothing is dropped. */
@@ -340,12 +355,13 @@
   }
 
   .hero__avatar {
-    width: 88px;
-    height: 88px;
+    width: 108px;
+    height: 108px;
+    padding: 4px;
   }
 
   .hero__avatar-fallback {
-    font-size: 1.9rem;
+    font-size: 2.2rem;
   }
 
   .hero__location {
