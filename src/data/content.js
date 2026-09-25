@@ -177,50 +177,57 @@ export const experience = [
  */
 export const projects = [
   {
-    name: 'Learnbot',
+    name: 'AI Teaching Assistant',
     blurb:
-      'A RAG teaching assistant used by 50+ finance students, combining Canvas content ingestion, Pinecone semantic search, and Claude for course-specific guidance.',
+      'A RAG teaching assistant used by 50+ finance students in a graduate finance course.',
     highlights: [
-      'Canvas ingestion feeding Pinecone semantic search',
-      'Answers scoped to academic-integrity constraints',
+      'Canvas content feeding Pinecone search',
+      'Scoped to academic-integrity rules',
     ],
-    stack: ['React', 'Flask', 'Pinecone', 'Claude', 'RAG'],
+    stack: ['React', 'Flask', 'Pinecone', 'Claude'],
     links: { github: null, demo: null },
   },
   {
-    name: 'DASH API',
+    name: 'PlanVoyage',
     blurb:
-      'A self-service platform for running open-source LLMs on an on-premises GPU server, giving faculty and students time-boxed access to scarce hardware.',
-    highlights: [
-      'Reservable time slots with time-bound credentials',
-      'Access over REST APIs or SSH on a Linux GPU host',
-    ],
-    stack: ['React', 'Flask', 'REST APIs', 'Linux', 'GPU Infrastructure'],
+      'A travel planner for discovering destinations and building day-by-day itineraries.',
+    highlights: ['Itinerary builder with saved trips', 'Role-based access on shared trips'],
+    stack: ['React', 'Node.js', 'Express', 'PostgreSQL'],
+    links: { github: null, demo: null },
+  },
+  {
+    name: 'BudgetAI',
+    blurb:
+      'An AI-powered budgeting app with spending insights and a 0–100 financial health score.',
+    highlights: ['Scoring on budget, savings, spending', 'AI insights over your transactions'],
+    stack: ['React', 'FastAPI', 'PostgreSQL', 'LLM'],
+    links: { github: null, demo: null },
+  },
+  {
+    name: 'Open-Source LLM Server',
+    blurb:
+      'Self-service, time-boxed access to open-source LLMs on an on-prem GPU server.',
+    highlights: ['Reservable, time-bound credentials', 'Access by REST API or SSH'],
+    stack: ['React', 'Flask', 'Linux', 'GPU'],
+    links: { github: null, demo: null },
+  },
+  {
+    name: 'Food Calorie Prediction',
+    blurb:
+      'A vision model that identifies food from a photo and estimates its calories.',
+    highlights: ['EfficientNetV2B0 on 101 classes', 'USDA FoodData calorie lookup'],
+    stack: ['Python', 'TensorFlow', 'Food-101', 'USDA API'],
     links: { github: null, demo: null },
   },
   {
     name: 'Agentic Workflow Engine',
     placeholder: true,
     blurb:
-      'An orchestration layer where LLM agents plan, call tools, and hand off work, with tracing throughout.',
-    highlights: [
-      'Describe the agent loop and tool-calling design',
-      'Note retries, failure modes, and evaluation',
-    ],
+      'An orchestration layer where LLM agents plan, call tools, and hand off work.',
+    highlights: ['Agent loop and tool-calling design', 'Retries, failure modes, evaluation'],
     stack: ['Python', 'LangGraph', 'Claude', 'FastAPI'],
     links: { github: null, demo: null },
   },
-  {
-    name: 'PlanVoyage',
-    blurb:
-      'A full-stack travel planning platform that helps users discover destinations, create personalized day-by-day itineraries, and manage complete trips in one place.',
-    highlights: [
-      'Streamlined destination discovery and itinerary creation',
-      'Implemented role-based access control for secure trip management',
-    ],
-    stack: ['React', 'Node.js', 'Express', 'REST APIs'],
-    links: { github: null, demo: null },
-},
   // {
   //   name: 'Realtime Voice Assistant',
   //   placeholder: true,

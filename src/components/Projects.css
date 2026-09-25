@@ -123,23 +123,28 @@
   border-color: var(--accent);
 }
 
+/* Clamped so one long blurb can't set the height of every card in the row. */
 .project__blurb {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   font-size: 0.86rem;
-  line-height: 1.6;
+  line-height: 1.55;
   color: var(--text-secondary);
 }
 
 .project__highlights {
-  margin-top: 12px;
+  margin-top: 10px;
   display: grid;
-  gap: 6px;
+  gap: 5px;
 }
 
 .project__highlights li {
   position: relative;
   padding-left: 18px;
   font-size: 0.79rem;
-  line-height: 1.5;
+  line-height: 1.45;
   color: var(--text-muted);
 }
 
@@ -161,7 +166,7 @@
   flex-wrap: wrap;
   gap: 6px;
   margin-top: auto;
-  padding-top: 14px;
+  padding-top: 11px;
 }
 
 .projects__more {
@@ -207,37 +212,134 @@
 
   .project {
     flex: initial;
-    padding: 18px;
+    padding: 15px 16px;
   }
 
   .project__name {
-    font-size: 1.04rem;
+    font-size: 1.02rem;
   }
 
   .project__blurb {
-    font-size: 0.89rem;
-    line-height: 1.62;
+    font-size: 0.87rem;
+    line-height: 1.55;
   }
 
   .project__highlights li {
-    font-size: 0.82rem;
+    font-size: 0.81rem;
   }
 
   .project__stack {
-    padding-top: 16px;
+    padding-top: 12px;
   }
 
   .projects__more {
-    margin-top: 18px;
+    margin-top: 14px;
     font-size: 0.88rem;
   }
 }
 
-/* A slightly smaller floor so four cards fit on one row from 1200px up
-   rather than only past 1440px — the second row was the single biggest
-   reason this section outgrew a laptop viewport. */
+/* One row, whatever the count. `auto-fit` with a px floor wraps the moment the
+   container is a little narrower than the ideal — a window that isn't
+   maximized, a scaled display — and that second row, often holding a single
+   orphan card, is what pushes this section past the fold. Column auto-flow
+   puts every card on one line and lets them narrow instead, and it keeps
+   working when a project is added. */
 @media (min-width: 1200px) {
   .projects {
-    grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .project {
+    padding: 13px 13px 14px;
+  }
+
+  /* Narrow columns mean more wrapping, so the type steps down with them. */
+  .project__name {
+    font-size: 0.94rem;
+  }
+
+  .project__blurb {
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .project__highlights li {
+    font-size: 0.76rem;
+    padding-left: 15px;
+  }
+
+  .project__links a {
+    width: 28px;
+    height: 28px;
+  }
+
+  .project__stack {
+    gap: 5px;
+    padding-top: 10px;
+  }
+
+  .project__stack .chip {
+    padding: 3px 8px;
+    font-size: 0.71rem;
+  }
+}
+
+/* Short desktop viewports: the row of cards plus the section header is what
+   pushes this past the fold, so the card's own padding and leading give it
+   back before anything gets cut. */
+@media (min-width: 900px) and (max-height: 860px) {
+  .project {
+    padding: 13px 14px;
+  }
+
+  .project__top {
+    margin-bottom: 6px;
+  }
+
+  .project__blurb {
+    line-height: 1.5;
+  }
+
+  .project__highlights {
+    margin-top: 8px;
+  }
+
+  .project__stack {
+    padding-top: 10px;
+  }
+
+  .projects__more {
+    margin-top: 11px;
+  }
+}
+
+@media (min-width: 900px) and (max-height: 720px) {
+  .project {
+    padding: 11px 13px;
+  }
+
+  .project__name {
+    font-size: 0.97rem;
+  }
+
+  .project__links a {
+    width: 28px;
+    height: 28px;
+  }
+
+  .project__blurb {
+    font-size: 0.83rem;
+    line-height: 1.45;
+  }
+
+  .project__highlights li {
+    font-size: 0.78rem;
+  }
+
+  .project__stack {
+    padding-top: 8px;
   }
 }
