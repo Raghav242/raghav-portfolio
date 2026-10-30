@@ -163,6 +163,7 @@
 }
 
 .job__heading {
+  font-family: var(--font-sans);
   font-size: inherit;
   font-weight: inherit;
 }

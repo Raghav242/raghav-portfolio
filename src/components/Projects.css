@@ -41,7 +41,7 @@
   position: absolute;
   inset: 0 0 auto 0;
   height: 2px;
-  background: linear-gradient(90deg, var(--accent), #a855f7);
+  background: var(--accent);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.32s var(--ease);
@@ -89,6 +89,7 @@
 }
 
 .project__badge {
+  font-family: var(--font-sans);
   flex-shrink: 0;
   font-size: 0.63rem;
   font-weight: 700;

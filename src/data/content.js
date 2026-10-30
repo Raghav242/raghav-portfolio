@@ -18,7 +18,7 @@ export const profile = {
   location: 'Boston, MA',
   photo: '/profile1.jpg',
   resume: '/Raghavendra-Kulkarni-Resume.pdf',
-  email: 'kulkarni.ragh@northeastern.edu',
+  email: 'raghavendrahk242@gmail.com',
   phone: '857-654-2114',
   links: {
     github: 'https://github.com/Raghav242',

@@ -19,6 +19,8 @@
 }
 
 .skills__group-title {
+  /* Small caps labels read better in the sans than the heading serif. */
+  font-family: var(--font-sans);
   display: flex;
   align-items: center;
   gap: 9px;
@@ -66,19 +68,12 @@
   .skill:hover {
     color: var(--text);
     background: var(--bg-elevated);
-    /* color-mix ties the hover ring to each logo's own brand color. */
-    border-color: color-mix(in srgb, var(--brand) 55%, transparent);
-    box-shadow: 0 3px 12px -6px var(--brand);
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-sm);
     transform: translateY(-2px);
   }
 
-  [data-theme='dark'] .skill:hover {
-    border-color: color-mix(in srgb, var(--brand-dark) 45%, transparent);
-    box-shadow: 0 3px 12px -6px var(--brand-dark);
-  }
-
   .skill:hover .skill__logo {
-    filter: saturate(1.15);
     transform: scale(1.08);
   }
 }
@@ -88,9 +83,7 @@
   height: 14px;
   flex-shrink: 0;
   color: var(--brand);
-  /* Restrained by default; full brand color on hover keeps the grid calm. */
-  filter: saturate(0.82);
-  transition: filter 0.2s var(--ease), transform 0.2s var(--ease);
+  transition: transform 0.2s var(--ease);
 }
 
 [data-theme='dark'] .skill__logo {
@@ -110,7 +103,6 @@
   line-height: 1;
   color: #fff;
   background: var(--brand);
-  filter: none;
 }
 
 [data-theme='dark'] .skill__logo--text {

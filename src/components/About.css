@@ -109,6 +109,7 @@
 }
 
 .about__education-title {
+  font-family: var(--font-sans);
   display: flex;
   align-items: center;
   gap: 8px;

@@ -8,27 +8,28 @@
    ========================================================================== */
 
 :root {
-  /* Light theme (default) */
-  --bg: #fbfbfd;
-  --bg-elevated: #ffffff;
-  --bg-subtle: #f3f4f7;
-  --bg-glass: rgba(255, 255, 255, 0.72);
+  /* Light theme (default) — monochrome ink on warm paper. The "accent" is
+     the ink itself, so emphasis comes from weight and contrast, not hue. */
+  --bg: #f7f5f1;
+  --bg-elevated: #fcfbf9;
+  --bg-subtle: #efece8;
+  --bg-glass: rgba(247, 245, 241, 0.8);
 
-  --text: #14161c;
-  --text-secondary: #4a5160;
-  --text-muted: #767e8f;
+  --text: #161311;
+  --text-secondary: #4c4844;
+  --text-muted: #68645f;
 
-  --border: #e5e7ec;
-  --border-strong: #d3d7e0;
+  --border: #e2dfda;
+  --border-strong: #cdc9c2;
 
-  --accent: #4f46e5;
-  --accent-hover: #4338ca;
-  --accent-soft: rgba(79, 70, 229, 0.09);
-  --accent-contrast: #ffffff;
+  --accent: #161311;
+  --accent-hover: #4c4844;
+  --accent-soft: rgba(22, 19, 17, 0.06);
+  --accent-contrast: #f7f5f1;
 
-  --shadow-sm: 0 1px 2px rgba(16, 20, 32, 0.05);
-  --shadow-md: 0 4px 16px -4px rgba(16, 20, 32, 0.09), 0 1px 3px rgba(16, 20, 32, 0.04);
-  --shadow-lg: 0 18px 44px -18px rgba(16, 20, 32, 0.24);
+  --shadow-sm: 0 1px 2px rgba(22, 19, 17, 0.04);
+  --shadow-md: 0 4px 14px -6px rgba(22, 19, 17, 0.1);
+  --shadow-lg: 0 16px 36px -20px rgba(22, 19, 17, 0.22);
 
   /* Scale */
   --container: 1080px;
@@ -37,8 +38,9 @@
   --radius: 14px;
   --radius-lg: 20px;
 
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  --font-sans: 'Schibsted Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Helvetica, Arial, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -48,22 +50,22 @@
 }
 
 [data-theme='dark'] {
-  --bg: #0c0e13;
-  --bg-elevated: #13161d;
-  --bg-subtle: #1a1e27;
-  --bg-glass: rgba(12, 14, 19, 0.72);
+  --bg: #11100f;
+  --bg-elevated: #181715;
+  --bg-subtle: #22201e;
+  --bg-glass: rgba(17, 16, 15, 0.8);
 
-  --text: #eceef3;
-  --text-secondary: #a8b0c0;
-  --text-muted: #7d8598;
+  --text: #ebe9e6;
+  --text-secondary: #c9c6c1;
+  --text-muted: #9e9a94;
 
-  --border: #232833;
-  --border-strong: #333a48;
+  --border: #2a2926;
+  --border-strong: #3d3a37;
 
-  --accent: #818cf8;
-  --accent-hover: #a5b0fc;
-  --accent-soft: rgba(129, 140, 248, 0.13);
-  --accent-contrast: #0c0e13;
+  --accent: #ebe9e6;
+  --accent-hover: #c9c6c1;
+  --accent-soft: rgba(235, 233, 230, 0.08);
+  --accent-contrast: #11100f;
 
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 4px 16px -4px rgba(0, 0, 0, 0.5);
@@ -168,9 +170,11 @@ h1,
 h2,
 h3,
 h4 {
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
   line-height: 1.2;
-  font-weight: 700;
-  letter-spacing: -0.021em;
+  font-weight: 600;
+  letter-spacing: -0.012em;
 }
 
 :focus-visible {

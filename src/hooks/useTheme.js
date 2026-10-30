@@ -22,7 +22,7 @@ export function useTheme() {
     // Keeps the mobile browser chrome in step with the page background.
     document
       .querySelector('meta[name="theme-color"]')
-      ?.setAttribute('content', theme === 'dark' ? '#0c0e13' : '#fbfbfd')
+      ?.setAttribute('content', theme === 'dark' ? '#11100f' : '#f7f5f1')
   }, [theme])
 
   const toggleTheme = useCallback(() => {
