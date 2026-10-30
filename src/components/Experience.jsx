@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import { experience } from '../data/content'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 import { asset } from '../lib/asset'
@@ -70,14 +70,28 @@ function JobHeader({ job }) {
   )
 }
 
-function JobDetail({ job }) {
-  return (
-    <>
-      <p className="job__summary">{job.summary}</p>
+/**
+ * One position's story. Summary, metrics and problems solved are always
+ * shown; only the optional `story` paragraph waits behind "Read more".
+ */
+function Position({ position, showHeading }) {
+  const [storyOpen, setStoryOpen] = useState(false)
+  const storyId = useId()
 
-      {job.metrics?.length > 0 && (
+  return (
+    <div className="position">
+      {showHeading && (
+        <h4 className="position__head">
+          <span className="position__role">{position.role}</span>
+          <span className="position__period">{position.period}</span>
+        </h4>
+      )}
+
+      <p className="job__summary">{position.summary}</p>
+
+      {position.metrics?.length > 0 && (
         <ul className="metrics">
-          {job.metrics.map((metric) => (
+          {position.metrics.map((metric) => (
             <li className="metric" key={metric.label}>
               <span className="metric__value">{metric.value}</span>
               <span className="metric__label">{metric.label}</span>
@@ -86,21 +100,43 @@ function JobDetail({ job }) {
         </ul>
       )}
 
-      <div className="job__narrative">
-        {job.narrative.map((paragraph, i) => (
-          <p key={i}>{paragraph}</p>
-        ))}
-      </div>
+      {position.points?.length > 0 && (
+        <ul className="job__points">
+          {position.points.map((point, i) => (
+            <li key={i}>{point}</li>
+          ))}
+        </ul>
+      )}
 
-      <ul className="job__stack">
-        {job.stack.map((tech) => (
-          <li className="chip" key={tech}>
-            {tech}
-          </li>
-        ))}
-      </ul>
-    </>
+      {position.story && (
+        <>
+          <p id={storyId} className="job__story" hidden={!storyOpen}>
+            {position.story}
+          </p>
+          <button
+            type="button"
+            className={`job__more ${storyOpen ? 'is-open' : ''}`}
+            onClick={() => setStoryOpen((open) => !open)}
+            aria-expanded={storyOpen}
+            aria-controls={storyId}
+          >
+            {storyOpen ? 'Show less' : 'Read more'}
+            <ChevronIcon />
+          </button>
+        </>
+      )}
+    </div>
   )
+}
+
+function JobDetail({ job }) {
+  // Sub-headings only when one company holds several positions; otherwise
+  // the header row above already names the role.
+  const showHeadings = job.positions.length > 1
+
+  return job.positions.map((position, i) => (
+    <Position key={position.role ?? i} position={position} showHeading={showHeadings} />
+  ))
 }
 
 /**

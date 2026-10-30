@@ -1,100 +1,50 @@
 import { profile } from '../data/content'
-import {
-  ArrowRightIcon,
-  GithubIcon,
-  LinkedinIcon,
-  MailIcon,
-  MapPinIcon,
-  PhoneIcon,
-} from './Icons'
+import { ArrowRightIcon, GithubIcon, LinkedinIcon, MailIcon } from './Icons'
 import Section from './Section'
 import './Contact.css'
-
-const channels = [
-  {
-    label: 'Email',
-    value: profile.email,
-    href: `mailto:${profile.email}`,
-    Icon: MailIcon,
-    // The CTA button is the same mailto link, so this row is hidden on phones
-    // and rejoins the list from 640px up. See Contact.css.
-    duplicatesCta: true,
-  },
-  {
-    label: 'Phone',
-    value: profile.phone,
-    href: `tel:${profile.phone.replace(/[^\d+]/g, '')}`,
-    Icon: PhoneIcon,
-  },
-  {
-    label: 'LinkedIn',
-    value: 'Connect with me',
-    href: profile.links.linkedin,
-    external: true,
-    Icon: LinkedinIcon,
-  },
-  {
-    label: 'GitHub',
-    value: 'See my code',
-    href: profile.links.github,
-    external: true,
-    Icon: GithubIcon,
-  },
-]
 
 export default function Contact() {
   return (
     <Section
       id="contact"
       eyebrow="Contact"
-      title="Let's build something"
-      lede="Open to software engineering roles. Email is fastest — I reply within a day."
+      title="Let's build something."
+      lede="Open to software engineering opportunities. Based in Boston and open to relocation."
       alt
     >
-      <div className="contact">
-        <div className="contact__cta reveal">
-          <p className="contact__cta-label">
-            <MapPinIcon width="15" height="15" />
-            Based in {profile.location} · open to relocation
-          </p>
-          <h3 className="contact__cta-title">Have a role or an idea in mind?</h3>
-          <p className="contact__cta-text">
-            Whether it's a backend team, a full-stack product, or something AI-shaped —
-            send a note and let's talk.
-          </p>
-          <a className="btn btn--primary contact__button" href={`mailto:${profile.email}`}>
-            <MailIcon />
-            {profile.email}
-            <ArrowRightIcon width="16" height="16" />
+      <div className="contact reveal">
+        <a className="btn btn--primary contact__button" href={`mailto:${profile.email}`}>
+          <MailIcon />
+          <span>{profile.email}</span>
+          <ArrowRightIcon width="16" height="16" />
+        </a>
+
+        <div className="contact__links">
+          <a
+            className="btn btn--ghost"
+            href={profile.links.github}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <GithubIcon width="17" height="17" />
+            GitHub
+          </a>
+          <a
+            className="btn btn--ghost"
+            href={profile.links.linkedin}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <LinkedinIcon width="17" height="17" />
+            LinkedIn
           </a>
         </div>
-
-        <ul className="contact__channels">
-          {channels.map(({ label, value, href, external, Icon, duplicatesCta }, index) => (
-            <li
-              key={label}
-              className={`reveal ${duplicatesCta ? 'contact__channel--duplicate' : ''}`}
-              style={{ '--reveal-delay': `${index * 70}ms` }}
-            >
-              <a
-                className="channel"
-                href={href}
-                target={external ? '_blank' : undefined}
-                rel={external ? 'noreferrer' : undefined}
-              >
-                <span className="channel__icon">
-                  <Icon width="17" height="17" />
-                </span>
-                <span className="channel__body">
-                  <span className="channel__label">{label}</span>
-                  <span className="channel__value">{value}</span>
-                </span>
-                <ArrowRightIcon width="16" height="16" className="channel__arrow" />
-              </a>
-            </li>
-          ))}
-        </ul>
       </div>
+
+      <p className="contact__phone reveal" style={{ '--reveal-delay': '80ms' }}>
+        Prefer a call?{' '}
+        <a href={`tel:${profile.phone.replace(/[^\d+]/g, '')}`}>{profile.phone}</a>
+      </p>
     </Section>
   )
 }

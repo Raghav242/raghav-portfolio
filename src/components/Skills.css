@@ -186,3 +186,40 @@
     gap: 5px;
   }
 }
+
+/* Full view ------------------------------------------------------------- */
+
+.skills__practices {
+  margin-top: 14px;
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+}
+
+.skills__practices-label {
+  margin-right: 8px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.skills__toggle {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  margin-top: 10px;
+  padding: 6px 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 4px;
+  transition: color 0.18s var(--ease), text-decoration-color 0.18s var(--ease);
+}
+
+.skills__toggle:hover {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}

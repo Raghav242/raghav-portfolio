@@ -362,15 +362,11 @@
     margin-bottom: 34px;
   }
 
+  /* Three equal columns; the labels are short phrases, so they wrap within
+     their column rather than pushing a stat onto a second row. */
   .hero__stats {
-    flex-wrap: wrap;
-    gap: 14px 48px;
+    gap: 14px 36px;
     padding-top: 22px;
-  }
-
-  .hero__stat {
-    flex: 0 1 auto;
-    min-width: 120px;
   }
 
   .hero__stat-value {

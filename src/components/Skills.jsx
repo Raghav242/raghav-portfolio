@@ -1,5 +1,6 @@
+import { useState } from 'react'
 import { brandIcons } from '../data/brandIcons'
-import { skills } from '../data/content'
+import { practices, skills } from '../data/content'
 import Section from './Section'
 import './Skills.css'
 
@@ -21,7 +22,25 @@ function resolve({ name, slug, hex }) {
   return { icon, light, dark, label: monogram(name) }
 }
 
+const totalCount = skills.reduce((sum, group) => sum + group.items.length, 0)
+const featuredCount = skills.reduce(
+  (sum, group) => sum + group.items.filter((item) => item.featured).length,
+  0,
+)
+
 export default function Skills() {
+  const [showAll, setShowAll] = useState(false)
+
+  // The default view is the featured core; the full list adds everything else
+  // in place, including groups that have no featured items at all.
+  const groups = skills
+    .map((group) => ({
+      ...group,
+      fullViewOnly: !group.items.some((item) => item.featured),
+      items: showAll ? group.items : group.items.filter((item) => item.featured),
+    }))
+    .filter((group) => group.items.length > 0)
+
   return (
     <Section
       id="skills"
@@ -29,12 +48,16 @@ export default function Skills() {
       title="Tools I work with"
       lede="What I reach for across backend, full-stack, and AI work."
     >
-      <div className="skills">
-        {skills.map((group, index) => (
+      <div className="skills" id="skills-list">
+        {groups.map((group, index) => (
           <div
             className="skills__group reveal"
             key={group.group}
             style={{ '--reveal-delay': `${index * 60}ms` }}
+            // Full-view-only groups mount after the reveal observer has run, so
+            // they start out revealed. The rest never carry a React-managed
+            // value, so toggling can't strip the flag the observer set.
+            data-revealed={group.fullViewOnly ? 'true' : undefined}
           >
             <h3 className="skills__group-title">{group.group}</h3>
             <ul className="skills__list">
@@ -68,6 +91,23 @@ export default function Skills() {
           </div>
         ))}
       </div>
+
+      {showAll && (
+        <p className="skills__practices">
+          <span className="skills__practices-label">Ways of working</span>
+          {practices.join(' · ')}
+        </p>
+      )}
+
+      <button
+        type="button"
+        className="skills__toggle"
+        onClick={() => setShowAll((all) => !all)}
+        aria-expanded={showAll}
+        aria-controls="skills-list"
+      >
+        {showAll ? 'Show fewer' : `View all technologies (${totalCount - featuredCount} more)`}
+      </button>
     </Section>
   )
 }

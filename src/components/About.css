@@ -16,12 +16,16 @@
   order: 1;
 }
 
-.about__facts {
+.about__philosophy {
   order: 2;
 }
 
-.about__education {
+.about__facts {
   order: 3;
+}
+
+.about__education {
+  order: 4;
 }
 
 /* Intro ------------------------------------------------------------------ */
@@ -36,28 +40,20 @@
   margin-top: 12px;
 }
 
-/* Trimmed to a readable lead on phones, with the rest a tap away, so the
-   section starts at roughly half its full height. The fade signals that the
-   text continues. */
-.about__prose--clamped {
-  max-height: 182px;
-  overflow: hidden;
-  mask-image: linear-gradient(to bottom, #000 68%, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, #000 68%, transparent);
+/* The signature line: set apart in the serif, with a hairline rule rather
+   than quote marks, so it reads as a sign-off rather than a pull quote. */
+.about__philosophy {
+  margin: 0;
+  padding-left: 14px;
+  border-left: 2px solid var(--accent);
 }
 
-.about__more {
-  order: 1;
-  align-self: flex-start;
-  margin-top: -12px;
-  padding: 4px 0;
-  font-size: 0.86rem;
-  font-weight: 600;
-  color: var(--accent);
-}
-
-.about__more:hover {
-  color: var(--accent-hover);
+.about__philosophy p {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.02rem;
+  line-height: 1.55;
+  color: var(--text);
 }
 
 /* Quick facts ------------------------------------------------------------ */
@@ -174,15 +170,8 @@
     gap: 26px;
   }
 
-  /* Room for the full intro, so the disclosure retires. */
-  .about__prose--clamped {
-    max-height: none;
-    mask-image: none;
-    -webkit-mask-image: none;
-  }
-
-  .about__more {
-    display: none;
+  .about__philosophy p {
+    font-size: 1.1rem;
   }
 
   .about__prose p {
@@ -258,12 +247,24 @@
     flex-direction: column;
   }
 
+  .about__main {
+    gap: 26px;
+  }
+
+  .about__philosophy {
+    padding-left: 18px;
+  }
+
+  .about__philosophy p {
+    font-size: 1.2rem;
+  }
+
   .about__side {
     gap: 16px;
   }
 
-  /* The prose no longer has a grid beneath it to fill the column, so it carries
-     the left side on its own and can afford the extra size. */
+  /* Two short paragraphs carry the left column on their own, so they can
+     afford the extra size. */
   .about__prose p {
     font-size: 1rem;
     line-height: 1.8;

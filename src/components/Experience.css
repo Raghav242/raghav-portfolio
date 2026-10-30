@@ -79,65 +79,146 @@
    ========================================================================== */
 
 .job__summary {
-  font-size: 0.87rem;
+  font-size: 0.9rem;
   line-height: 1.62;
-  color: var(--text-secondary);
+  color: var(--text);
 }
 
+/* Outcomes are the headline of each role, so they read as figures rather
+   than as numbers buried in a sentence. */
 .metrics {
   display: flex;
   flex-wrap: wrap;
   gap: 7px;
-  margin-top: 12px;
+  margin-top: 14px;
 }
 
-/* Three across rather than stacked — the values are short enough to fit. */
 .metric {
   flex: 1 1 0;
   min-width: 0;
-  padding: 8px 7px;
+  padding: 10px 10px 9px;
   background: var(--bg-subtle);
-  border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--border));
-  border-radius: 9px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
 }
 
 .metric__value {
   display: block;
-  font-size: 0.84rem;
+  font-size: 1.08rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
   color: var(--accent);
+  white-space: nowrap;
 }
 
 .metric__label {
   display: block;
-  font-size: 0.65rem;
+  font-size: 0.66rem;
   line-height: 1.3;
   color: var(--text-muted);
-  margin-top: 1px;
+  margin-top: 4px;
 }
 
-/* Prose, not bullets — the paragraphs read as one continuous account, so they
-   get a touch more line height than the surrounding chrome. */
-.job__narrative {
-  margin-top: 14px;
+/* The problems solved: two short statements, marked like the project
+   highlights so the two sections share one vocabulary. */
+.job__points {
+  display: grid;
+  gap: 9px;
+  margin-top: 16px;
 }
 
-.job__narrative p {
+.job__points li {
+  position: relative;
+  padding-left: 18px;
   font-size: 0.85rem;
-  line-height: 1.68;
+  line-height: 1.6;
   color: var(--text-secondary);
 }
 
-.job__narrative p + p {
-  margin-top: 10px;
+.job__points li::before {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 0.62em;
+  width: 5px;
+  height: 5px;
+  border: 1.5px solid var(--accent);
+  border-radius: 2px;
+  transform: rotate(45deg);
+  opacity: 0.75;
 }
 
-.job__stack {
+.job__story {
+  margin-top: 12px;
+  padding-left: 18px;
+  font-size: 0.85rem;
+  line-height: 1.68;
+  color: var(--text-secondary);
+  animation: story-in 0.32s var(--ease);
+}
+
+@keyframes story-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.job__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 10px 0 0 18px;
+  padding: 2px 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: color 0.18s var(--ease);
+}
+
+.job__more:hover {
+  color: var(--accent);
+}
+
+.job__more svg {
+  width: 15px;
+  height: 15px;
+  transition: transform 0.25s var(--ease);
+}
+
+.job__more.is-open svg {
+  transform: rotate(180deg);
+}
+
+/* Several positions at one company: each opens with its own title and dates,
+   separated by a hairline so the progression reads top to bottom. */
+.position + .position {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--border);
+}
+
+.position__head {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 14px;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2px 12px;
+  margin-bottom: 8px;
+  font-family: var(--font-sans);
+  letter-spacing: normal;
+}
+
+.position__role {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.position__period {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-muted);
 }
 
 /* ==========================================================================
@@ -263,39 +344,39 @@
   }
 
   .job__summary {
-    font-size: 0.92rem;
-    line-height: 1.65;
+    font-size: 0.97rem;
+    line-height: 1.62;
   }
 
   .metrics {
     gap: 9px;
-    margin-top: 14px;
+    margin-top: 16px;
   }
 
   .metric {
     flex: 1 1 130px;
-    padding: 9px 13px;
+    padding: 12px 14px 11px;
   }
 
   .metric__value {
-    font-size: 0.97rem;
+    font-size: 1.4rem;
   }
 
   .metric__label {
-    font-size: 0.72rem;
+    font-size: 0.74rem;
   }
 
-  .job__narrative {
-    margin-top: 16px;
-  }
-
-  .job__narrative p {
+  .job__points li,
+  .job__story {
     font-size: 0.89rem;
-    line-height: 1.7;
   }
 
-  .job__stack {
-    margin-top: 16px;
+  .position__role {
+    font-size: 0.95rem;
+  }
+
+  .position__period {
+    font-size: 0.79rem;
   }
 
   .job__trigger {
@@ -478,22 +559,24 @@
 
   .metrics {
     gap: 7px;
-    margin-top: 10px;
+    margin-top: 11px;
   }
 
   .metric {
-    padding: 7px 11px;
+    padding: 8px 12px;
   }
 
-  .job__narrative {
+  .metric__value {
+    font-size: 1.2rem;
+  }
+
+  .job__points {
+    gap: 6px;
     margin-top: 11px;
   }
 
-  .job__narrative p + p {
-    margin-top: 8px;
-  }
-
-  .job__stack {
-    margin-top: 11px;
+  .position + .position {
+    margin-top: 13px;
+    padding-top: 12px;
   }
 }

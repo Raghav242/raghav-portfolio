@@ -56,7 +56,7 @@ export default function Hero() {
           </h1>
 
           <p className="hero__role reveal" style={{ '--reveal-delay': '160ms' }}>
-            {profile.role}
+            {profile.headline}
           </p>
 
           <p className="hero__tagline reveal" style={{ '--reveal-delay': '210ms' }}>
