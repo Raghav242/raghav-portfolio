@@ -176,7 +176,8 @@ export const experience = [
  * Cards show `art`, `name`, `blurb` and `stack` up front; `details` sit behind
  * "Explore project". `status: 'in-progress'` adds the badge, and splits the
  * stack into `stack` (in use today) and `planned`. `featured` widens the card
- * on the desktop grid.
+ * to two grid columns — only use it when the count still fills whole rows
+ * (with eight projects, none is featured).
  *
  * `art` picks a conceptual line illustration from ProjectArt.jsx — none of
  * them are screenshots. Links stay null until a repo or demo is public.
@@ -223,7 +224,6 @@ export const projects = [
     name: 'Daybook',
     art: 'dashboard',
     status: 'in-progress',
-    featured: true,
     blurb:
       'One place to organize your day — tasks, calendars, budgets, meals, and personal information, with AI to help you find what you need.',
     stack: ['React', 'TypeScript', 'FastAPI', 'PostgreSQL'],
@@ -287,6 +287,26 @@ export const projects = [
       tech: 'An EfficientNetV2-B0 model trained on Food-101 with TensorFlow, paired with the USDA FoodData API.',
     },
     links: { github: null, demo: null },
+  },
+  {
+    name: 'Image Editing App',
+    art: 'editor',
+    blurb: 'A desktop image editor with filters, color tools, and compression — usable from a GUI or a script.',
+    stack: ['Java', 'Swing', 'JUnit'],
+    details: {
+      problem:
+        'Most edits are a quick tweak, but some are the same steps on image after image — one tool should handle both.',
+      solution:
+        'The same editing engine sits behind a Swing interface and a command line that runs scripts, so a batch of edits can be replayed automatically.',
+      features: [
+        'Blur, sharpen, sepia, grayscale, flips, and brightness',
+        'Color correction, levels, and RGB histograms',
+        'Split view to compare an edit against the original',
+        'Image compression built on a Haar wavelet transform',
+      ],
+      tech: 'Plain Java in a Model-View-Controller design, with a Swing GUI and JUnit tests that use mock models and controllers.',
+    },
+    links: { github: 'https://github.com/Raghav242/ImageEditingApp', demo: null },
   },
   {
     name: 'Agentic Workflow Engine',

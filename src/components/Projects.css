@@ -1,4 +1,4 @@
-/* Mobile: stacking seven cards is a lot of scrolling. Swiping horizontally
+/* Mobile: stacking eight cards is a lot of scrolling. Swiping horizontally
    keeps the whole set reachable without growing the page, and the next card
    peeks in at the edge so it's obvious there's more. Cards align to the top
    so opening one doesn't stretch its neighbours. */
@@ -27,12 +27,13 @@
   flex-direction: column;
   flex: 0 0 86%;
   min-width: 0;
-  padding: 12px 12px 4px;
+  padding: 12px;
   scroll-snap-align: center;
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
+  cursor: pointer;
   /* Lets the glow layer sit beneath the card's text at z-index -1 without
      dropping behind the card's own background. */
   isolation: isolate;
@@ -123,10 +124,6 @@
   .project:hover .art__line {
     opacity: 1;
   }
-}
-
-.project.is-open {
-  border-color: var(--border-strong);
 }
 
 /* Illustration ---------------------------------------------------------- */
@@ -263,11 +260,21 @@
   color: var(--text-secondary);
 }
 
+/* Cards stay one size; the full sentence is always in the modal. */
+.project .project__blurb {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
+
 .project__stack {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
-  margin-top: 12px;
+  margin-top: auto;
+  padding-top: 12px;
 }
 
 .project__stack .chip {
@@ -275,112 +282,194 @@
   font-size: 0.72rem;
 }
 
+/* Opening ---------------------------------------------------------------- */
+
+/* The name is the real button; its ::after stretches over the whole card so
+   any click on the card opens it. Links sit above that layer. */
+.project__open {
+  padding: 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+}
+
+.project__open::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.project__open:focus-visible {
+  outline: none;
+}
+
+.project:has(.project__open:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.project__links {
+  position: relative;
+  z-index: 1;
+}
+
+.project__arrow {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--text-muted);
+  transition: transform 0.25s var(--ease), color 0.25s var(--ease);
+}
+
+@media (hover: hover) {
+  .project:hover .project__arrow {
+    color: var(--accent);
+    transform: translateX(3px);
+  }
+}
+
+.chip--more {
+  color: var(--text-muted);
+  background: transparent;
+  border-style: dashed;
+}
+
+/* Modal ------------------------------------------------------------------ */
+
+.project-modal {
+  width: min(640px, calc(100% - 2 * var(--gutter)));
+  max-width: none;
+  max-height: calc(100dvh - 48px);
+  margin: auto;
+  padding: 0;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overscroll-behavior: contain;
+}
+
+.project-modal[open] {
+  animation: modal-in 0.28s var(--ease);
+}
+
+.project-modal::backdrop {
+  background: rgba(10, 9, 8, 0.55);
+  backdrop-filter: blur(4px);
+}
+
+.project-modal[open]::backdrop {
+  animation: backdrop-in 0.28s var(--ease);
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* The page behind stays put while the modal is open. */
+html:has(.project-modal[open]) {
+  overflow: hidden;
+}
+
+.project-modal__body {
+  position: relative;
+  padding: 16px 18px 20px;
+}
+
+.project-modal__close {
+  position: absolute;
+  top: 24px;
+  right: 26px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  color: var(--text-secondary);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  transition: color 0.18s var(--ease), border-color 0.18s var(--ease);
+}
+
+.project-modal__close:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.project__art.project-modal__art {
+  height: 150px;
+}
+
+.project-modal__title {
+  font-size: 1.3rem;
+}
+
+.project-modal .project__blurb {
+  display: block;
+  font-size: 0.92rem;
+}
+
+.project-modal .project__stack {
+  margin-top: 12px;
+}
+
 /* Planned technology reads as a quiet footnote, never as chips — so it can't
    be mistaken for what the project already runs on. */
 .project__planned {
-  margin-top: 8px;
-  font-size: 0.74rem;
+  margin-top: 10px;
+  font-size: 0.78rem;
   line-height: 1.5;
   color: var(--text-muted);
 }
 
 .project__planned-label {
   margin-right: 6px;
-  font-size: 0.64rem;
+  font-size: 0.66rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-/* Explore ---------------------------------------------------------------- */
-
-/* `margin-top: auto` pins the control to the bottom, so every card in a grid
-   row lines its button up with its neighbours'. */
-.project__foot {
-  margin-top: auto;
-  padding-top: 12px;
-}
-
-.project__explore {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  min-height: 40px;
-  padding: 8px 0;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  border-top: 1px dashed var(--border);
-  transition: color 0.18s var(--ease);
-}
-
-.project__explore:hover {
-  color: var(--accent);
-}
-
-.project__explore svg {
-  transition: transform 0.25s var(--ease);
-}
-
-.project__explore:hover svg {
-  transform: translateX(3px);
-}
-
-.project.is-open .project__explore svg {
-  transform: rotate(90deg);
-}
-
-/* Animating grid rows from 0fr to 1fr opens the panel to its exact height
-   with no measuring. */
 .project__details {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.38s var(--ease);
-}
-
-.project.is-open .project__details {
-  grid-template-rows: 1fr;
-}
-
-.project__details-inner {
-  min-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: opacity 0.25s var(--ease);
-}
-
-.project.is-open .project__details-inner {
-  opacity: 1;
-  transition-delay: 0.08s;
+  margin-top: 16px;
+  padding-top: 4px;
+  border-top: 1px dashed var(--border);
 }
 
 .project__details h4 {
-  margin-top: 12px;
+  margin-top: 14px;
   font-family: var(--font-sans);
-  font-size: 0.64rem;
+  font-size: 0.66rem;
   font-weight: 700;
   letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--text-muted);
 }
 
-.project__details h4:first-child {
-  margin-top: 4px;
-}
-
 .project__details p,
 .project__features li {
   margin-top: 4px;
-  font-size: 0.82rem;
-  line-height: 1.55;
+  font-size: 0.88rem;
+  line-height: 1.6;
   color: var(--text-secondary);
 }
 
 .project__features {
   display: grid;
   gap: 3px;
-  padding-bottom: 12px;
 }
 
 .project__features li {
@@ -392,7 +481,7 @@
   content: '';
   position: absolute;
   left: 3px;
-  top: 0.6em;
+  top: 0.65em;
   width: 5px;
   height: 5px;
   border: 1.5px solid var(--accent);
@@ -401,14 +490,11 @@
   opacity: 0.75;
 }
 
-/* The tech note is last whenever it exists, so the closing padding moves
-   onto it. */
-.project__features:has(+ h4) {
-  padding-bottom: 0;
-}
-
-.project__details-inner > p:last-child {
-  padding-bottom: 12px;
+@media (prefers-reduced-motion: reduce) {
+  .project-modal[open],
+  .project-modal[open]::backdrop {
+    animation: none;
+  }
 }
 
 .projects__more {
@@ -442,9 +528,8 @@
 }
 
 /* Roomy enough for a real grid; the carousel retires. Cards stretch to their
-   row so the face of every card lines up; Daybook, the featured project,
-   takes a full row. Placing it third in content.js is what keeps both this
-   grid and the four-column one free of holes. */
+   row so the face of every card lines up. A featured card takes a full row
+   here; see content.js for when that still leaves the grid without holes. */
 @media (min-width: 720px) {
   .projects {
     display: grid;
@@ -458,22 +543,28 @@
 
   .project {
     flex: initial;
-    padding: 14px 14px 4px;
+    padding: 14px;
   }
 
   .project--featured {
     grid-column: span 2;
   }
 
-  /* While a card is open, its row would stretch every neighbour to match,
-     leaving tall empty cards beside it. Letting them keep their own height
-     only trades that for slightly uneven bottoms. */
-  .projects:has(.project.is-open) {
-    align-items: start;
+  .project__art {
+    height: 110px;
   }
 
-  .project__art {
-    height: 118px;
+  .project-modal__body {
+    padding: 20px 24px 26px;
+  }
+
+  .project-modal__close {
+    top: 28px;
+    right: 34px;
+  }
+
+  .project__art.project-modal__art {
+    height: 180px;
   }
 
   .projects__more {
@@ -482,12 +573,21 @@
   }
 }
 
-/* Four across: the featured card spans two, so seven projects fill exactly
-   two rows. */
+/* Four across: eight projects fill exactly two rows, and both rows should sit
+   on one screen with the heading. */
 @media (min-width: 1100px) {
   .projects {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 12px;
+  }
+
+  .project {
+    padding: 12px;
+  }
+
+  .project__art {
+    height: 96px;
+    margin-bottom: 11px;
   }
 
   .project__name {
@@ -500,28 +600,55 @@
 }
 
 /* Short desktop viewports: the plates give height back first. */
-@media (min-width: 900px) and (max-height: 860px) {
+@media (min-width: 900px) and (max-height: 920px) {
   .project__art {
-    height: 96px;
-    margin-bottom: 11px;
+    height: 76px;
+    margin-bottom: 10px;
   }
 
   .project__stack {
-    margin-top: 10px;
+    padding-top: 10px;
   }
 }
 
-@media (min-width: 900px) and (max-height: 720px) {
+@media (min-width: 900px) and (max-height: 820px) {
+  .project__art {
+    height: 60px;
+  }
+}
+
+@media (min-width: 900px) and (max-height: 760px) {
   .project {
-    padding: 11px 12px 2px;
+    padding: 10px 11px 11px;
   }
 
   .project__art {
-    height: 80px;
+    height: 54px;
+    margin-bottom: 9px;
+    padding: 4px;
+  }
+
+  .project__top {
+    margin-bottom: 4px;
   }
 
   .project__blurb {
     font-size: 0.82rem;
     line-height: 1.48;
+  }
+
+  .project__stack {
+    padding-top: 8px;
+  }
+
+  .projects__more {
+    margin-top: 10px;
+  }
+}
+
+/* A 1366x768 panel with browser chrome: the plates go entirely. */
+@media (min-width: 900px) and (max-height: 640px) {
+  .project .project__art {
+    display: none;
   }
 }

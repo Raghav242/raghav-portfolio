@@ -137,6 +137,24 @@ function Agents() {
   )
 }
 
+function Editor() {
+  return (
+    <>
+      {/* Photo in split view: the left half shows the edit applied */}
+      <rect className="art__panel art__panel--ink" x="24" y="16" width="120" height="88" rx="6" />
+      <rect className="art__soft" x="25" y="17" width="59" height="86" />
+      <circle className="art__line" cx="112" cy="38" r="8" />
+      <path className="art__ink" d="M30 92l28-34 18 20 16-14 46 28" />
+      <path className="art__line art__dash" d="M84 22v76" />
+      {/* RGB histogram */}
+      <rect className="art__panel" x="154" y="16" width="62" height="88" rx="6" />
+      <path className="art__line" d="M162 92h46" />
+      <path className="art__ink" d="M162 90c8 0 10-40 18-40s10 26 16 26 8-14 12-14" />
+      <path className="art__line" d="M162 90c6 0 12-24 20-24s12 18 18 18 6-30 8-30" />
+    </>
+  )
+}
+
 const drawings = {
   tutor: Tutor,
   dashboard: Dashboard,
@@ -145,6 +163,7 @@ const drawings = {
   server: Server,
   vision: Vision,
   agents: Agents,
+  editor: Editor,
 }
 
 export default function ProjectArt({ kind }) {
