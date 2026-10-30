@@ -103,6 +103,26 @@
   background: var(--accent-soft);
 }
 
+/* Hairline under the current section, drawn out from the center so the
+   indicator glides between links as the scroll spy moves. */
+.nav__link::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 3px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: currentColor;
+  opacity: 0.55;
+  transform: scaleX(0);
+  transition: transform 0.28s var(--ease);
+}
+
+.nav__link.is-active::after {
+  transform: scaleX(1);
+}
+
 /* Actions ---------------------------------------------------------------- */
 
 .nav__actions {

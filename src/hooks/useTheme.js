@@ -3,14 +3,14 @@ import { useCallback, useEffect, useState } from 'react'
 const STORAGE_KEY = 'portfolio-theme'
 
 /**
- * Light is the default, regardless of the visitor's OS setting — dark mode is
+ * Dark is the default, regardless of the visitor's OS setting — light mode is
  * opt-in via the toggle. Once picked, that choice persists across visits.
  */
 function getInitialTheme() {
-  if (typeof window === 'undefined') return 'light'
+  if (typeof window === 'undefined') return 'dark'
 
   const stored = window.localStorage.getItem(STORAGE_KEY)
-  return stored === 'dark' || stored === 'light' ? stored : 'light'
+  return stored === 'dark' || stored === 'light' ? stored : 'dark'
 }
 
 export function useTheme() {

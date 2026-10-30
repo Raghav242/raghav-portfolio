@@ -1,9 +1,14 @@
+import { useRef } from 'react'
 import { profile, projects } from '../data/content'
+import { useCardGlow } from '../hooks/useCardGlow'
 import { ArrowRightIcon, ExternalLinkIcon, GithubIcon } from './Icons'
 import Section from './Section'
 import './Projects.css'
 
 export default function Projects() {
+  const listRef = useRef(null)
+  useCardGlow(listRef, '.project')
+
   return (
     <Section
       id="projects"
@@ -12,13 +17,15 @@ export default function Projects() {
       lede="Side projects where I pick the stack and go deep."
       alt
     >
-      <div className="projects">
+      <div className="projects" ref={listRef}>
         {projects.map((project, index) => (
           <article
             className={`project reveal ${project.placeholder ? 'project--draft' : ''}`}
             key={project.name}
             style={{ '--reveal-delay': `${index * 90}ms` }}
           >
+            <span className="project__glow" aria-hidden="true" />
+
             <div className="project__top">
               <h3 className="project__name">
                 {project.name}

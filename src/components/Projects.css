@@ -31,8 +31,64 @@
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
+  /* Lets the glow layer sit beneath the card's text at z-index -1 without
+     dropping behind the card's own background. */
+  isolation: isolate;
   transition: border-color 0.22s var(--ease), box-shadow 0.22s var(--ease),
     transform 0.22s var(--ease);
+
+  /* Cursor highlight: soft charcoal on paper, faint silver in the dark.
+     `--mx` / `--my` come from useCardGlow. */
+  --glow-fill: rgba(22, 19, 17, 0.035);
+  --glow-edge: rgba(22, 19, 17, 0.28);
+}
+
+[data-theme='dark'] .project {
+  --glow-fill: rgba(235, 233, 230, 0.05);
+  --glow-edge: rgba(235, 233, 230, 0.32);
+}
+
+.project__glow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+}
+
+.project__glow::before,
+.project__glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.project__glow::before {
+  background: radial-gradient(
+    320px circle at var(--mx, 50%) var(--my, 0%),
+    var(--glow-fill),
+    transparent 70%
+  );
+}
+
+/* A 1px ring just inside the border, lit only near the cursor — reads as the
+   border itself brightening. (The card's `overflow: hidden` clips anything
+   drawn over the border box proper.) */
+.project__glow::after {
+  padding: 1px;
+  background: radial-gradient(
+    180px circle at var(--mx, 50%) var(--my, 0%),
+    var(--glow-edge),
+    transparent 70%
+  );
+  /* Longhands on purpose: the minifier rewrites the `mask` shorthand and
+     drops the composite keyword from it. */
+  mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
+  mask-clip: content-box, border-box;
+  mask-composite: exclude;
 }
 
 /* Accent sweep that reveals on hover. */
@@ -56,6 +112,10 @@
 
   .project:hover::before {
     transform: scaleX(1);
+  }
+
+  .project:hover .project__glow {
+    opacity: 1;
   }
 }
 

@@ -7,6 +7,27 @@
   align-items: center;
   padding-block: calc(var(--nav-height) + 20px) 34px;
   overflow: hidden;
+
+  /* Resting spot for the cursor light. useSpotlight overwrites these in px
+     while a mouse is over the hero; touch and reduced-motion visitors keep
+     this static composition. */
+  --spot-x: 50%;
+  --spot-y: 42%;
+
+  /* Light theme: dots darken a touch under the light, and the halo is a
+     paper-white lift rather than a gray haze. */
+  --spot-dots: 0.2;
+  --spot-halo: rgba(255, 255, 255, 0.55);
+  --ambient-one: rgba(255, 255, 255, 0.6);
+  --ambient-two: rgba(22, 19, 17, 0.035);
+}
+
+/* Dark theme: dim dots turn soft silver; the glows stay well short of white. */
+[data-theme='dark'] .hero {
+  --spot-dots: 0.3;
+  --spot-halo: rgba(235, 233, 230, 0.045);
+  --ambient-one: rgba(235, 233, 230, 0.04);
+  --ambient-two: rgba(235, 233, 230, 0.025);
 }
 
 /* Backdrop --------------------------------------------------------------- */
@@ -18,42 +39,71 @@
   z-index: 0;
 }
 
+/* Static ambient light for depth. No blur filter — the gradient already
+   fades to nothing, and a blurred layer would re-rasterize whenever the
+   spotlight above it repaints. */
 .hero__glow {
   position: absolute;
   border-radius: 50%;
-  filter: blur(70px);
-  opacity: 0.5;
-  /* Colored glows don't belong in the monochrome theme. */
-  display: none;
 }
 
 .hero__glow--one {
-  width: 300px;
-  height: 300px;
-  top: -110px;
-  left: -70px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.32), transparent 68%);
+  width: 420px;
+  height: 420px;
+  top: -170px;
+  left: -130px;
+  background: radial-gradient(circle, var(--ambient-one), transparent 70%);
 }
 
 .hero__glow--two {
-  width: 340px;
-  height: 340px;
-  bottom: -150px;
-  right: -100px;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.22), transparent 68%);
+  width: 460px;
+  height: 460px;
+  bottom: -210px;
+  right: -150px;
+  background: radial-gradient(circle, var(--ambient-two), transparent 70%);
 }
 
-[data-theme='dark'] .hero__glow {
-  opacity: 0.42;
-}
-
-.hero__grid {
+.hero__grid,
+.hero__spotlight {
   position: absolute;
   inset: 0;
   background-image: radial-gradient(currentColor 1px, transparent 1px);
   background-size: 30px 30px;
   color: var(--text);
-  opacity: 0.045;
+}
+
+/* Soft pool of light under the cursor. */
+.hero__halo {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle 480px at var(--spot-x) var(--spot-y),
+    var(--spot-halo),
+    transparent 70%
+  );
+}
+
+/* The same dot lattice as the grid, drawn stronger and masked to a circle
+   around the cursor. The two layers share a box and background-size, so the
+   lit dots sit exactly on top of the idle ones and fade into them. */
+.hero__spotlight {
+  opacity: var(--spot-dots);
+  mask-image: radial-gradient(
+    circle 240px at var(--spot-x) var(--spot-y),
+    #000,
+    rgba(0, 0, 0, 0.35) 45%,
+    transparent 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    circle 240px at var(--spot-x) var(--spot-y),
+    #000,
+    rgba(0, 0, 0, 0.35) 45%,
+    transparent 100%
+  );
+}
+
+.hero__grid {
+  opacity: 0.05;
   mask-image: radial-gradient(ellipse 70% 60% at 50% 42%, #000 25%, transparent 78%);
   -webkit-mask-image: radial-gradient(
     ellipse 70% 60% at 50% 42%,
@@ -247,22 +297,18 @@
     padding-block: calc(var(--nav-height) + 24px) 48px;
   }
 
-  .hero__glow {
-    filter: blur(90px);
-  }
-
   .hero__glow--one {
-    width: 460px;
-    height: 460px;
-    top: -140px;
-    left: -80px;
+    width: 720px;
+    height: 720px;
+    top: -280px;
+    left: -200px;
   }
 
   .hero__glow--two {
-    width: 520px;
-    height: 520px;
-    bottom: -200px;
-    right: -120px;
+    width: 780px;
+    height: 780px;
+    bottom: -340px;
+    right: -240px;
   }
 
   .hero__avatar-wrap {

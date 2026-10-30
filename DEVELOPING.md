@@ -84,10 +84,10 @@ className. React never touches attributes it doesn't manage, so the flag survive
 Colors live as CSS custom properties in `src/index.css`: `:root` for light,
 `[data-theme='dark']` for dark. Change `--accent` in both blocks to re-skin the whole site.
 
-Light is the default for every first-time visitor — the OS `prefers-color-scheme` setting is
-deliberately ignored. Dark mode is opt-in via the toggle, and that choice is remembered in
+Dark is the default for every first-time visitor — the OS `prefers-color-scheme` setting is
+deliberately ignored. Light mode is opt-in via the toggle, and that choice is remembered in
 `localStorage` under `portfolio-theme`. An inline script in `index.html` applies a stored
-dark preference before first paint so returning visitors never get a flash of white.
+light preference before first paint so returning visitors never get a flash of dark.
 
 To follow the OS preference instead, restore the `matchMedia` check in
 `src/hooks/useTheme.js` and in that inline script — both have to agree, or the page will

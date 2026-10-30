@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { profile, stats } from '../data/content'
+import { useSpotlight } from '../hooks/useSpotlight'
 import { asset } from '../lib/asset'
 import {
   ArrowRightIcon,
@@ -14,13 +15,17 @@ import './Hero.css'
 
 export default function Hero() {
   const [photoFailed, setPhotoFailed] = useState(false)
+  const heroRef = useRef(null)
+  useSpotlight(heroRef)
 
   return (
-    <section id="home" className="hero">
+    <section id="home" className="hero" ref={heroRef}>
       <div className="hero__backdrop" aria-hidden="true">
         <span className="hero__glow hero__glow--one" />
         <span className="hero__glow hero__glow--two" />
         <span className="hero__grid" />
+        <span className="hero__halo" />
+        <span className="hero__spotlight" />
       </div>
 
       <div className="container hero__inner">
