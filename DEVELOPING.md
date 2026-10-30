@@ -34,8 +34,18 @@ URL can see the numbers.
 
 GitHub Pages can't run a backend, so `src/lib/visits.js` stores the counters in
 [Abacus](https://abacus.jasoncameron.dev), a free keyless counter API. A visit counts once per
-browser session; a visitor counts once per browser. The dev server never records visits, and
-opening the dashboard doesn't count as one.
+browser session; a visitor counts once per browser. Neither the dev server nor a build opened on
+`localhost` (`npm run preview`) records visits, and opening the dashboard doesn't count as one.
+
+To zero both counters:
+
+```bash
+npm run count:reset
+```
+
+This uses the Abacus admin keys in `.env.local` (gitignored). Abacus shows those keys only
+once, so keep a copy somewhere safe — without them the counters can't be reset, only replaced
+by changing `NAMESPACE` in `src/lib/visits.js`.
 
 ## Skill logos
 

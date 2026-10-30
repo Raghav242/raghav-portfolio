@@ -9,10 +9,18 @@
  *                don't inflate it.
  * - `visitors` — one per browser, ever, marked with a localStorage flag.
  *
- * Nothing is sent from the dev server, so local work never pollutes the counts.
+ * Nothing is sent from the dev server or from any local build (`npm run
+ * preview`, screenshot tooling), so local work never pollutes the counts.
+ *
+ * The counters were made with Abacus's /create, which issues admin keys; those
+ * live in .env.local and `npm run count:reset` uses them to zero the counts.
+ * (The original `raghav242-portfolio` counters were created implicitly by a
+ * first hit, have no admin key, and can't be reset — hence `-v2`.)
  */
 const API = 'https://abacus.jasoncameron.dev'
-const NAMESPACE = 'raghav242-portfolio'
+export const NAMESPACE = 'raghav242-portfolio-v2'
+
+const LOCAL_HOSTS = ['localhost', '127.0.0.1', '[::1]']
 
 const VISITOR_FLAG = 'portfolio-visitor'
 const SESSION_FLAG = 'portfolio-visit'
@@ -32,7 +40,7 @@ function hasFlag(storage, key) {
 }
 
 export function recordVisit() {
-  if (import.meta.env.DEV) return
+  if (import.meta.env.DEV || LOCAL_HOSTS.includes(window.location.hostname)) return
 
   if (!hasFlag(window.sessionStorage, SESSION_FLAG)) hit('visits')
   if (!hasFlag(window.localStorage, VISITOR_FLAG)) hit('visitors')
