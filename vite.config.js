@@ -8,4 +8,13 @@ export default defineConfig({
   // needs that prefix. Must match the repo name exactly. Paths in content.js
   // go through the asset() helper in src/lib/asset.js for the same reason.
   base: '/raghav-portfolio/',
+  build: {
+    // Two pages: the portfolio, and the unlisted visitor dashboard at /count/.
+    rollupOptions: {
+      input: {
+        main: 'index.html',
+        count: 'count/index.html',
+      },
+    },
+  },
 })

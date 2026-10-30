@@ -26,6 +26,17 @@ npm run preview  # serve the built bundle locally
 
 To change anything textual, edit `src/data/content.js` — no component needs touching.
 
+## Visitor count
+
+`/count/` is an unlisted dashboard showing unique visitors and total visits. Nothing on the
+site links to it and it's marked `noindex`, but it isn't password-protected — anyone with the
+URL can see the numbers.
+
+GitHub Pages can't run a backend, so `src/lib/visits.js` stores the counters in
+[Abacus](https://abacus.jasoncameron.dev), a free keyless counter API. A visit counts once per
+browser session; a visitor counts once per browser. The dev server never records visits, and
+opening the dashboard doesn't count as one.
+
 ## Skill logos
 
 Each entry in `skills` has a `slug` naming a [Simple Icons](https://simpleicons.org) logo.
