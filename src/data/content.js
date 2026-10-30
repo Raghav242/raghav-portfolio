@@ -85,16 +85,18 @@ export const experience = [
     location: 'Boston, MA',
     period: 'Sep 2025 – Dec 2025 · Sep 2026 – Present',
     summary:
-      'Building AI systems for faculty — grading platforms, retrieval pipelines, and the inference infrastructure underneath them.',
+      'Building AI systems for faculty and students — evaluation platforms, retrieval pipelines, and the inference infrastructure underneath them.',
     metrics: [
-      { value: '8h → 30m', label: 'Essay grading time' },
+      { value: '8h → 30m', label: 'Workflow processing time' },
       { value: '10+', label: 'Faculty adopted' },
-      { value: '300+', label: 'Students reached' },
+      { value: '300+', label: 'Active users' },
     ],
     stack: [
       'Next.js',
+      'TypeScript',
       'Flask',
       'FastAPI',
+      'PostgreSQL',
       'LangGraph',
       'LlamaIndex',
       'Qdrant',
@@ -104,8 +106,8 @@ export const experience = [
       'Whisper',
     ],
     narrative: [
-      `At DASH, I build AI tools for faculty and students. I helped build an essay-grading platform with Next.js, Flask, and LangGraph that cut grading time from 8+ hours to under 30 minutes and now supports 300+ students. I also built a RAG pipeline with LlamaIndex and Qdrant to bring course-specific context into the system.`,
-      `More recently, I've been building an AI presentation coach using Next.js, FastAPI, and PostgreSQL. I also built the distributed pipeline behind it using Celery, RabbitMQ, and Redis to handle transcription, LLM evaluation, and F5-TTS voice generation without slowing down the user experience.`,
+      `At DASH, I build AI tools for faculty and students. I helped build Ava, an AI evaluation platform with React, Next.js, TypeScript, and Flask that cut workflow processing time from 8+ hours to under 30 minutes and now supports 300+ active users. I also built RAG and agentic pipelines with LangGraph, LlamaIndex, and Qdrant to keep LLM outputs grounded and accurate.`,
+      `More recently, I've been building Lyra, a multi-agent voice coaching platform using TypeScript, FastAPI, and PostgreSQL, with stateful sessions and LLM-to-LLM feedback routing. I also built the distributed pipeline behind it using Celery, RabbitMQ, and Redis to handle GPU-heavy transcription, LLM evaluation, and voice generation without slowing down the user experience.`,
     ],
   },
   {
@@ -119,14 +121,14 @@ export const experience = [
     summary:
       'Built the APIs behind a distributed engineering-data platform, and spent a lot of time making slow things fast.',
     metrics: [
-      { value: '80s → 2s', label: 'Page latency' },
+      { value: '80s → 2s', label: 'Workflow latency' },
       { value: '10,000+', label: 'Daily transactions' },
       { value: '95%+', label: 'Test coverage' },
     ],
-    stack: ['Java', 'Spring Boot', 'SAP ERP', 'Oracle', 'Docker', 'GitHub Actions', 'JUnit 5'],
+    stack: ['Java', 'Spring Boot', 'React', 'SAP ERP', 'Oracle PLM', 'Docker', 'GitHub Actions', 'JUnit 5'],
     narrative: [
-      `I built and scaled Java and Spring Boot REST APIs for engineering workflows, handling 10,000+ daily transactions across multiple data sources. One of my biggest improvements was taking a workflow from over 80 seconds to around 2 seconds by introducing lazy loading, request consolidation, and server-side caching, improving the experience for 200+ engineers.`,
-      `I also worked on reliability and maintainability, building CI/CD workflows with GitHub Actions and Docker and refactoring tightly coupled service and data-access code. I added JUnit 5 and Mockito test coverage across APIs, services, and integrations, helping catch regressions earlier and make the codebase easier to change safely.`,
+      `I built Java and Spring Boot REST APIs that integrate SAP ERP and Oracle PLM data into a distributed engineering platform, using payload caching and batch processing to handle 10,000+ daily transactions. One of my biggest improvements was taking a PCB workflow from over 80 seconds to around 2 seconds by rewriting its React components with asynchronous data fetching and lazy loading, improving the experience for 200+ engineers.`,
+      `I also worked on reliability and maintainability, building CI/CD pipelines with GitHub Actions and Docker that cut deployment times by 45%, and refactoring tightly coupled service and data-access code. I added JUnit 5 and Mockito test suites reaching 95%+ coverage, cutting production regressions by 50% and making the codebase easier to change safely.`,
     ],
   },
   {
@@ -144,10 +146,10 @@ export const experience = [
       { value: '500+', label: 'Enterprise tenants' },
       { value: '3 clouds', label: 'AWS, Azure, HANA' },
     ],
-    stack: ['React', 'Python', 'Terraform', 'Kubernetes', 'AWS', 'Azure', 'SAP HANA Cloud'],
+    stack: ['React', 'Java', 'Spring Boot', 'Python', 'Terraform', 'Kubernetes', 'Jenkins', 'AWS', 'Azure', 'SAP HANA Cloud'],
     narrative: [
-      `I worked on a multi-cloud platform that automated infrastructure provisioning across AWS, Azure, and SAP HANA Cloud. I built React and Python components along with Terraform, Kubernetes, and Helm configurations to automate provisioning, scaling, and environment setup.`,
-      `I also built Python automation for infrastructure lifecycle workflows that previously required a lot of manual work. Across 500+ enterprise tenants, this eliminated roughly 40 hours of setup per environment and made deployments much more repeatable and reliable.`,
+      `I worked on a multi-cloud platform that automated infrastructure provisioning across AWS, Azure, and SAP HANA Cloud. I built React components and Java/Spring Boot REST APIs, cutting workflow latency by 60%, along with Terraform, Kubernetes, and Helm configurations that automated deployments for 15+ microservices and took environment spin-up from days to under 45 minutes.`,
+      `I also built asynchronous Python automation for infrastructure workflows that previously required a lot of manual work. Across 500+ enterprise tenants, this eliminated roughly 40 hours of setup per environment. Alongside that, I set up blue-green CI/CD pipelines with Jenkins and GitHub Actions, wired into Grafana and Splunk, which tripled our release cadence.`,
     ],
   },
   {
